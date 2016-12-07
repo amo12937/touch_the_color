@@ -3,6 +3,7 @@ var gulp = require("gulp");
 var dir = (root) => {
   var self = (path) => `${root}/${path}`;
   self.scripts = (path) => self(`scripts/${path}`)
+  self.styles = (path) => self(`styles/${path}`)
 
   return self;
 };
@@ -15,6 +16,10 @@ gulp.task("html", () =>
   .pipe(gulp.dest(dest("")))
 );
 
+
+/***************************
+ * scripts                 *
+ ***************************/
 ((
   babelify = require("babelify"),
   browserify = require("browserify"),
@@ -36,6 +41,24 @@ gulp.task("html", () =>
   );
 })();
 
+/***************************
+ * styles                  *
+ ***************************/
+((
+  sass = require("gulp-sass"),
+  autoprefixer = require("gulp-autoprefixer")
+) => {
+  gulp.task("styles", () =>
+    gulp.src(src.styles("main.scss"))
+    .pipe(sass())
+    .pipe(autoprefixer())
+    .pipe(gulp.dest(dest.styles("")))
+  )
+})();
+
+/***************************
+ * watch                   *
+ ***************************/
 ((browserSync = require("browser-sync")) => {
   gulp.task("browser-sync", () => browserSync({server: dest("")}));
 
@@ -47,6 +70,9 @@ gulp.task("html", () =>
 
     gulp.watch([src.scripts("**/*.js"), src.scripts("**/*.jsx")])
       .on("change", gulp.series("scripts", "reload"));
+
+    gulp.watch(src.styles("**/*.scss"))
+      .on("change", gulp.series("styles", "reload"));
   });
 })();
 
