@@ -1,6 +1,10 @@
 "use strict";
 
 import React from "react"
+
+import SquareBox from "components/SquareBox"
+import Board from "components/board/Board"
+
 import rand from "models/rand"
 import itemCollection from "models/item_collection"
 import IteratorWithTryNext from "models/iterator_with_try_next"
@@ -34,9 +38,9 @@ export default class App extends React.Component {
 
     return (
       <div className="app">
-        Hello World
-        <button onClick={this.handleClick.bind(this)}>foo</button>
-        <div>{tiles}</div>
+        <Board />
+        <SquareBox bgColor="#ccffcc" />
+        <SquareBox bgColor="#ffffcc" />
       </div>
     );
   }
