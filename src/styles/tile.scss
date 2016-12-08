@@ -1,0 +1,29 @@
+.tile {
+  position: relative;
+  width: 88%;
+  height: 88%;
+
+  border: 4px solid;
+  border-radius: 10px;
+
+  .tile_content {
+    /* to expand div*/
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    /* to centerize text */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* to prevent user to select the text */
+    user-select: none;
+
+    font-size: xx-large;
+  }
+
+  margin: 6%;
+}

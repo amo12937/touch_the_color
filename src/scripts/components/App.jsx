@@ -2,13 +2,13 @@
 
 import React from "react"
 
-import SquareBox from "components/SquareBox"
 import Board from "components/board/Board"
 
 import rand from "models/rand"
 import itemCollection from "models/item_collection"
 import IteratorWithTryNext from "models/iterator_with_try_next"
 import TileContainer from "models/tile_container"
+import ColorMaster from "models/ColorMaster"
 import wu from "wu"
 
 export default class App extends React.Component {
@@ -39,8 +39,11 @@ export default class App extends React.Component {
     return (
       <div className="app">
         <Board />
-        <SquareBox bgColor="#ccffcc" />
-        <SquareBox bgColor="#ffffcc" />
+        {ColorMaster.map((color) =>
+          <div style={{backgroundColor: color, color:color.textColor()}}>
+            {color.toString()} {color.brightness()}
+          </div>
+        )}
       </div>
     );
   }
