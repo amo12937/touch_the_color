@@ -2,5 +2,10 @@
 
 import wu from "wu"
 
-export default (m) => wu.repeat(m).map((n) => Math.floor(Math.random() * n))
+export default ((self = {}) => {
+  self.randInt = (n) => Math.floor(Math.random() * n);
+  self.randIterator = (n) => wu.repeat(n).map(self.randInt);
+
+  return self;
+})();
 

@@ -4,33 +4,43 @@ import React from "react"
 
 import Board from "components/board/Board"
 
-import rand from "models/rand"
+import Rand from "models/Rand"
 import itemCollection from "models/item_collection"
 import IteratorWithTryNext from "models/iterator_with_try_next"
-import TileContainer from "models/tile_container"
+import TileContainer from "models/TileContainer"
+import TileModel from "models/Tile"
 import ColorMaster from "models/ColorMaster"
+import Pool from "models/Pool"
 import wu from "wu"
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.hint = itemCollection(rand)([0, 1, 2, 3, 4, 5, 6, 7, 8], 4, [20, 20])
-    this.tileContainer = new TileContainer(9,
-      wu.chain(
-        itemCollection(rand)(Array.from("abcdefghijklmnopqr"), 9).take(20),
-        itemCollection(rand)(Array.from("ABCDEFGHIJKLMNOPQR"), 9).take(20),
-        itemCollection(rand)(Array.from("abcdefghijklmnopqr"), 9)
-      )
-    );
+    this.hintContainer = itemCollection(Rand.randIterator)([0, 1, 2, 3, 4, 5, 6, 7, 8], 4, [20, 20]);
+    this.hint = Array.from(this.hintContainer.take(4));
+
+    this.tileContainer = new TileContainer(9, [
+      [new Pool(ColorMaster[0].map((color) => new TileModel(color))), 20],
+      [new Pool(ColorMaster[1].map((color) => new TileModel(color, color, color.toString()))), -1]
+    ]);
     this.state = {
+      hint: this.hint,
       tiles: this.tileContainer.tiles()
     }
+
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
-    console.log(this)
-    this.tileContainer.select(this.hint.next().value);
-    this.setState({tiles: this.tileContainer.tiles()});
+  handleClick(cell_id) {
+    //this.tileContainer.select(this.hint.next().value);
+    if (this.hint[0] != cell_id) return;
+    this.tileContainer.select(cell_id);
+    this.hint.shift();
+    this.hint.push(this.hintContainer.next().value);
+    this.setState({
+      hint: this.hint,
+      tiles: this.tileContainer.tiles()
+    });
   }
 
   render() {
@@ -38,9 +48,15 @@ export default class App extends React.Component {
 
     return (
       <div className="app">
-        <Board />
-        {ColorMaster.map((color) =>
-          <div style={{backgroundColor: color, color:color.textColor()}}>
+        <div>{this.state.hint.map((n) => n + 1).join(", ")}</div>
+        <Board
+          num_of_rows={3}
+          num_of_cells={3}
+          tiles={tiles}
+          onClick={this.handleClick}
+        />
+        {ColorMaster[0].map((color) =>
+          <div key={color.toString()} style={{backgroundColor: color, color:color.textColor()}}>
             {color.toString()} {color.brightness()}
           </div>
         )}
