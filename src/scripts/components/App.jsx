@@ -25,7 +25,8 @@ export default class App extends React.Component {
     ]);
     this.state = {
       hint: this.hint,
-      tiles: this.tileContainer.tiles()
+      tiles: this.tileContainer.tiles(),
+      failed: {}
     }
 
     this.handleClick = this.handleClick.bind(this);
@@ -33,14 +34,21 @@ export default class App extends React.Component {
 
   handleClick(cell_id) {
     //this.tileContainer.select(this.hint.next().value);
-    if (this.hint[0] != cell_id) return;
+    if (this.hint[0] != cell_id) {
+      var failed = {}
+      failed[cell_id] = true;
+      this.setState({failed: failed})
+      return;
+    }
     this.tileContainer.select(cell_id);
     this.hint.shift();
     this.hint.push(this.hintContainer.next().value);
     this.setState({
       hint: this.hint,
-      tiles: this.tileContainer.tiles()
+      tiles: this.tileContainer.tiles(),
+      failed: {}
     });
+    return true;
   }
 
   render() {
@@ -53,6 +61,7 @@ export default class App extends React.Component {
           num_of_rows={3}
           num_of_cells={3}
           tiles={tiles}
+          failed={this.state.failed}
           onClick={this.handleClick}
         />
         {ColorMaster[0].map((color) =>

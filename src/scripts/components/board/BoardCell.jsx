@@ -2,7 +2,8 @@
 
 import React from "react"
 import Tile from "components/Tile"
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import AnimateOnChange from "react-animate-on-change"
+import ReactCSSTransitionGroup from "react-addons-css-transition-group"
 
 export default class BoardCell extends React.Component {
   constructor(props) {
@@ -11,7 +12,7 @@ export default class BoardCell extends React.Component {
   }
 
   handleClick() {
-    this.props.onClick(this.props.cell_id)
+    this.props.onClick(this.props.cell_id);
   }
 
   render() {
@@ -22,13 +23,20 @@ export default class BoardCell extends React.Component {
 
     var tile = this.props.tile;
 
+    console.log(this.props.cell_id, this.props.failed);
+
     return (
       <div className="board_cell" onTouchStart={handleTouchStart} onClick={handleClick}>
         <ReactCSSTransitionGroup
           transitionName="board_item"
           transitionEnterTimeout={400}
           transitionLeaveTimeout={400}>
-          <Tile key={tile.key} tile={tile} />
+          <AnimateOnChange key={tile.key}
+            baseClassName="board_item"
+            animationClassName="board_item_failed"
+            animate={this.props.failed}>
+            <Tile tile={tile} />
+          </AnimateOnChange>
         </ReactCSSTransitionGroup>
       </div>
     );
