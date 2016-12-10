@@ -6,6 +6,7 @@ export default class Tile {
     this.borderColor = borderColor;
     this.text = text;
     this.textColor = bgColor.textColor();
+    this.key = "" + bgColor + borderColor + text;
   }
 }
 

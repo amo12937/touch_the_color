@@ -2,6 +2,7 @@
 
 import React from "react"
 import Tile from "components/Tile"
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 export default class BoardCell extends React.Component {
   constructor(props) {
@@ -19,9 +20,16 @@ export default class BoardCell extends React.Component {
     else
       var handleClick = this.handleClick;
 
+    var tile = this.props.tile;
+
     return (
       <div className="board_cell" onTouchStart={handleTouchStart} onClick={handleClick}>
-        <Tile tile={this.props.tile} />
+        <ReactCSSTransitionGroup
+          transitionName="board_item"
+          transitionEnterTimeout={400}
+          transitionLeaveTimeout={400}>
+          <Tile key={tile.key} tile={tile} />
+        </ReactCSSTransitionGroup>
       </div>
     );
   }
