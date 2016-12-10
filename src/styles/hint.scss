@@ -1,10 +1,21 @@
+$current-hint-inner-size: 12vmin;
+$current-hint-margin: 1.2vmin;
+$current-hint-size: $current-hint-inner-size + 2 * $current-hint-margin;
+
+$hint-inner-size: 8vmin;
+$hint-margin: 1vmin;
+$hint-size: $hint-inner-size + 2 * $hint-margin;
+
+$hint-container-width: $current-hint-size + 6 * $hint-size;
+$hint-container-height: $current-hint-size;
+
 .hint_container {
   width: 100%;
-  height: 18vmin;
+  height: $hint-container-height;
 
   .hint_container_content {
-    width: 90vmin;
-    height: 18vmin;
+    width: $hint-container-width;
+    height: $hint-container-height;
     background-color: #eeeeff;
     box-sizing: border-box;
     margin: 0 auto;
@@ -12,24 +23,24 @@
       clear: both;
     }
 
-    padding: 0 0 0 36vmin;
+    padding: 0 0 0 (3 * $hint-size);
   }
 }
 
 
 .hint {
   transition: all 400ms;
-  width: 10vmin;
-  height: 10vmin;
+  width: $hint-inner-size;
+  height: $hint-inner-size;
   float: left;
-  margin: 6.5vmin 1vmin 1.5vmin;
+  margin: ($current-hint-inner-size + $current-hint-margin - $hint-inner-size) $hint-margin $current-hint-margin;
 
   &.hint-0 {
     position: absolute;
-    width: 15vmin;
-    height: 15vmin;
+    width: $current-hint-inner-size;
+    height: $current-hint-inner-size;
     float: left;
-    margin: 1.5vmin;
+    margin: $current-hint-margin;
 
     &.hint_item-leave-active {
       transform: scale(2);
@@ -39,25 +50,25 @@
 
   &.hint-1 {
     position: absolute;
-    transform: translate(18vmin, 0);
+    transform: translate($current-hint-size, 0);
   }
 
   &.hint-2 {
     position: absolute;
-    transform: translate(30vmin, 0);
+    transform: translate(($current-hint-size + $hint-size), 0);
   }
 
   &.hint-3 {
     position: absolute;
-    transform: translate(42vmin, 0);
+    transform: translate(($current-hint-size + 2 * $hint-size), 0);
 
     &.hint_item-enter {
-      transform: translate(42vmin, 0) scale(0.5);
+      transform: translate(($current-hint-size + 2 * $hint-size), 0) scale(0.5);
       opacity: 0;
     }
 
     &.hint_item-enter-active {
-      transform: translate(42vmin, 0) scale(1);
+      transform: translate(($current-hint-size + 2 * $hint-size), 0) scale(1);
       opacity: 1;
     }
   }

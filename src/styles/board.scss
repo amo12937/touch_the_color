@@ -1,10 +1,13 @@
+$board-size: 84vmin;
+$board-cell-size: $board-size / 3;
+
 .board {
   width: 100%;
-  height: 90vmin;
+  height: $board-size;
 
   .board_content {
-    width: 90vmin;
-    height: 90vmin;
+    width: $board-size;
+    height: $board-size;
     background-color: #ffeeee;
     box-sizing: border-box;
     margin: 0 auto;
@@ -13,7 +16,7 @@
 
 .board_row {
   width: 100%;
-  height: 30vmin;
+  height: $board-cell-size;
 
   &:after {
     clear: both;
@@ -21,8 +24,8 @@
 }
 
 .board_cell {
-  width: 28vmin;
-  height: 28vmin;
+  width: ($board-cell-size - 2vmin);
+  height: ($board-cell-size - 2vmin);
   float: left;
   position: relative;
   margin: 1vmin;
