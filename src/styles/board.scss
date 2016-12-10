@@ -21,10 +21,11 @@
 }
 
 .board_cell {
-  width: 30vmin;
-  height: 30vmin;
+  width: 28vmin;
+  height: 28vmin;
   float: left;
   position: relative;
+  margin: 1vmin;
 }
 
 .board_item-enter {

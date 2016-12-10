@@ -23,8 +23,6 @@ export default class BoardCell extends React.Component {
 
     var tile = this.props.tile;
 
-    console.log(this.props.cell_id, this.props.failed);
-
     return (
       <div className="board_cell" onTouchStart={handleTouchStart} onClick={handleClick}>
         <ReactCSSTransitionGroup

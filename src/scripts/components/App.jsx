@@ -3,6 +3,7 @@
 import React from "react"
 
 import Board from "components/board/Board"
+import HintContainer from "components/hint/HintContainer"
 
 import Rand from "models/Rand"
 import itemCollection from "models/item_collection"
@@ -21,10 +22,12 @@ export default class App extends React.Component {
 
     this.tileContainer = new TileContainer(9, [
       [new Pool(ColorMaster[0].map((color) => new TileModel(color))), 20],
-      [new Pool(ColorMaster[1].map((color) => new TileModel(color, color, color.toString()))), -1]
+      [new Pool([].concat.apply([], ColorMaster[1].map((color) =>
+        [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => new TileModel(color, color, i))
+      ))), -1]
     ]);
     this.state = {
-      hint: this.hint,
+      hint: this.hint.map((i) => this.tileContainer.tiles()[i]),
       tiles: this.tileContainer.tiles(),
       failed: {}
     }
@@ -42,10 +45,11 @@ export default class App extends React.Component {
     }
     this.tileContainer.select(cell_id);
     this.hint.shift();
+    var tiles = this.tileContainer.tiles()
     this.hint.push(this.hintContainer.next().value);
     this.setState({
-      hint: this.hint,
-      tiles: this.tileContainer.tiles(),
+      hint: this.hint.map((i) => this.tileContainer.tiles()[i]),
+      tiles: tiles,
       failed: {}
     });
     return true;
@@ -56,7 +60,7 @@ export default class App extends React.Component {
 
     return (
       <div className="app">
-        <div>{this.state.hint.map((n) => n + 1).join(", ")}</div>
+        <HintContainer hints={this.state.hint} />
         <Board
           num_of_rows={3}
           num_of_cells={3}
