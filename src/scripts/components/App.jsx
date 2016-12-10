@@ -68,11 +68,6 @@ export default class App extends React.Component {
           failed={this.state.failed}
           onClick={this.handleClick}
         />
-        {ColorMaster[0].map((color) =>
-          <div key={color.toString()} style={{backgroundColor: color, color:color.textColor()}}>
-            {color.toString()} {color.brightness()}
-          </div>
-        )}
       </div>
     );
   }

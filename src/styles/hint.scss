@@ -16,7 +16,6 @@ $hint-container-height: $current-hint-size;
   .hint_container_content {
     width: $hint-container-width;
     height: $hint-container-height;
-    background-color: #eeeeff;
     box-sizing: border-box;
     margin: 0 auto;
     &:after {
