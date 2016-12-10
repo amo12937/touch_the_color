@@ -16,17 +16,50 @@
   }
 }
 
-.hint_current {
-  width: 15vmin;
-  height: 15vmin;
-  float: left;
-  margin: 1.5vmin;
-}
 
 .hint {
+  transition: all 400ms;
   width: 10vmin;
   height: 10vmin;
   float: left;
   margin: 6.5vmin 1vmin 1.5vmin;
+
+  &.hint-0 {
+    position: absolute;
+    width: 15vmin;
+    height: 15vmin;
+    float: left;
+    margin: 1.5vmin;
+
+    &.hint_item-leave-active {
+      transform: scale(2);
+      opacity: 0;
+    }
+  }
+
+  &.hint-1 {
+    position: absolute;
+    transform: translate(18vmin, 0);
+  }
+
+  &.hint-2 {
+    position: absolute;
+    transform: translate(30vmin, 0);
+  }
+
+  &.hint-3 {
+    position: absolute;
+    transform: translate(42vmin, 0);
+
+    &.hint_item-enter {
+      transform: translate(42vmin, 0) scale(0.5);
+      opacity: 0;
+    }
+
+    &.hint_item-enter-active {
+      transform: translate(42vmin, 0) scale(1);
+      opacity: 1;
+    }
+  }
 }
 

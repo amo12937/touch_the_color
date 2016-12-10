@@ -5,9 +5,12 @@ import Tile from "components/Tile"
 
 export default class Hint extends React.Component {
   render() {
-    var className = this.props.current ? "hint_current" : "hint"
+    var classes = [
+      "hint",
+      "hint-" + this.props.hint_order
+    ];
     return (
-      <div className={className}>
+      <div className={classes.join(" ")}>
         <Tile tile={this.props.tile} />
       </div>
     );

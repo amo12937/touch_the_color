@@ -1,6 +1,8 @@
 "use strict";
 
 import React from "react"
+import ReactCSSTransitionGroup from "react-addons-css-transition-group"
+
 import Hint from "components/hint/Hint"
 
 import TileModel from "models/Tile"
@@ -21,12 +23,17 @@ export default class HintContainer extends React.Component {
     );
 
     var hints = this.props.hints.map((tile, i) =>
-      <Hint key={i} current={i == 0} tile={tile} />
+      <Hint key={"hint_" + tile.key} hint_order={i} tile={tile} />
     )
     return (
       <div className="hint_container">
         <div className="hint_container_content">
-          {hints}
+          <ReactCSSTransitionGroup
+            transitionName="hint_item"
+            transitionEnterTimeout={400}
+            transitionLeaveTimeout={400}>
+            {hints}
+          </ReactCSSTransitionGroup>
         </div>
       </div>
     );

@@ -17,11 +17,11 @@ import wu from "wu"
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.hintContainer = itemCollection(Rand.randIterator)([0, 1, 2, 3, 4, 5, 6, 7, 8], 4, [20, 20]);
+    this.hintContainer = itemCollection(Rand.randIterator)([0, 1, 2, 3, 4, 5, 6, 7, 8], 4, [100]);
     this.hint = Array.from(this.hintContainer.take(4));
 
     this.tileContainer = new TileContainer(9, [
-      [new Pool(ColorMaster[0].map((color) => new TileModel(color))), 20],
+      [new Pool(ColorMaster[0].map((color) => new TileModel(color))), 100],
       [new Pool([].concat.apply([], ColorMaster[1].map((color) =>
         [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => new TileModel(color, color, i))
       ))), -1]
