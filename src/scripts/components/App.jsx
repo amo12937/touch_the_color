@@ -6,7 +6,7 @@ import ScoreHintContainer from "components/ScoreHintContainer"
 import Timer from "components/Timer"
 import Board from "components/board/Board"
 
-import Game from "models/Game"
+import Game from "models/game/Game"
 
 export default class App extends React.Component {
   constructor(props) {
