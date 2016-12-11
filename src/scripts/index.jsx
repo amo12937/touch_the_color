@@ -8,3 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("root")
   );
 });
+
+document.addEventListener("touchmove", (e) => {
+  e.preventDefault();
+});
