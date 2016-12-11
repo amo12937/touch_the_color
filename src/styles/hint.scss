@@ -9,14 +9,14 @@
   transition: all 400ms;
   width: $hint-inner-size;
   height: $hint-inner-size;
-  margin: ($current-hint-inner-size + $current-hint-margin - $hint-inner-size) $hint-margin $current-hint-margin;
+  margin: ($current-hint-inner-size + $margin - $hint-inner-size) $margin $margin;
 
   &.hint-0 {
     position: absolute;
     width: $current-hint-inner-size;
     height: $current-hint-inner-size;
     float: left;
-    margin: $current-hint-margin;
+    margin: $margin;
 
     &.hint_item-leave-active {
       transform: scale(2);

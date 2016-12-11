@@ -1,0 +1,19 @@
+.timer {
+  width: $timer-width;
+  height: $timer-inner-height;
+  margin: $margin auto;
+}
+
+.timer-back {
+  width: 100%;
+  height: 100%;
+  background-color: #cccccc;
+  border-radius: 2vmin;
+}
+
+.timer-front {
+  width: 50%;
+  height: 100%;
+  background-color: #ff0000;
+  border-radius: 2vmin;
+}

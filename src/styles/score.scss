@@ -1,33 +1,24 @@
 .score_hint_container {
-  width: 100%;
+  width: $score-hint-container-width;
   height: $score-hint-container-height;
 
-  .score_hint_container_content {
-    width: $score-hint-container-width;
-    height: $score-hint-container-height;
-
-    box-sizing: border-box;
-    margin: 0 auto;
-    &:after {
-      clear: both;
-    }
-    display: block;
-  }
+  margin: auto;
 }
 
 .score_container {
-  width: $score-container-width;
-  height: $score-hint-container-height;
+  width: $score-container-inner-width;
+  height: $score-hint-container-inner-height;
   position: relative;
   float: left;
   text-align: bottom;
 
   background-color: #cccccc;
   border-radius: 2vmin;
+  margin: $margin;
 }
 
 .score {
-  height: ($score-hint-container-height / 2);
+  height: ($score-hint-container-inner-height / 2);
   margin: 0 3vmin;
 
   position: relative;
@@ -43,7 +34,7 @@
     align-items: center;
     justify-content: flex-start;
 
-    font-size: xx-large;
+    font-size: x-large;
   }
 
   .score_value {

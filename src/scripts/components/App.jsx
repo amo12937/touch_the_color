@@ -2,8 +2,9 @@
 
 import React from "react"
 
-import Board from "components/board/Board"
 import ScoreHintContainer from "components/ScoreHintContainer"
+import Timer from "components/Timer"
+import Board from "components/board/Board"
 
 import Game from "models/Game"
 
@@ -41,14 +42,17 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="app">
-        <ScoreHintContainer score={this.state.score} hints={this.state.hints} />
-        <Board
-          num_of_rows={3}
-          num_of_cells={3}
-          tiles={this.state.tiles}
-          failed={this.state.failed}
-          onClick={this.handleClick}
-        />
+        <div className="app_content">
+          <ScoreHintContainer score={this.state.score} hints={this.state.hints} />
+          <Timer />
+          <Board
+            num_of_rows={3}
+            num_of_cells={3}
+            tiles={this.state.tiles}
+            failed={this.state.failed}
+            onClick={this.handleClick}
+          />
+        </div>
       </div>
     );
   }

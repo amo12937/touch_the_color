@@ -1,33 +1,20 @@
-$board-size: 84vmin;
-$board-cell-size: $board-size / 3;
-
 .board {
-  width: 100%;
+  width: $board-size;
   height: $board-size;
-
-  .board_content {
-    width: $board-size;
-    height: $board-size;
-    box-sizing: border-box;
-    margin: 0 auto;
-  }
+  margin: 0 auto;
 }
 
 .board_row {
-  width: 100%;
+  width: $board-size;
   height: $board-cell-size;
-
-  &:after {
-    clear: both;
-  }
 }
 
 .board_cell {
-  width: ($board-cell-size - 2vmin);
-  height: ($board-cell-size - 2vmin);
+  width: $board-cell-inner-size;
+  height: $board-cell-inner-size;
   float: left;
   position: relative;
-  margin: 1vmin;
+  margin: $margin;
 }
 
 .board_item-enter {
