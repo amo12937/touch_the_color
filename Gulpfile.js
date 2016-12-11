@@ -11,6 +11,14 @@ var dir = (root) => {
 var src = dir("src");
 var dest = dir("dest");
 
+
+((del = require("del")) =>
+  gulp.task("clean", () => del([dest("*")]))
+)();
+
+/***************************
+ * html                    *
+ ***************************/
 gulp.task("html", () =>
   gulp.src(src("index.html"))
   .pipe(gulp.dest(dest("")))
@@ -76,7 +84,7 @@ gulp.task("html", () =>
   });
 })();
 
-gulp.task("dev", gulp.series(gulp.parallel(
+gulp.task("dev", gulp.series("clean", gulp.parallel(
   "html", "scripts", "styles"
 ), gulp.parallel("browser-sync", "watch")));
 
