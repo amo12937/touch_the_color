@@ -1,0 +1,14 @@
+$current-hint-inner-size: 12vmin;
+$current-hint-margin: 1vmin;
+$current-hint-size: $current-hint-inner-size + 2 * $current-hint-margin;
+
+$hint-inner-size: 8vmin;
+$hint-margin: 1vmin;
+$hint-size: $hint-inner-size + 2 * $hint-margin;
+
+$score-hint-container-width: 84vmin;
+$score-hint-container-height: $current-hint-size;
+
+$hint-container-width: ($score-hint-container-width + $current-hint-size) / 2;
+$score-container-width: ($score-hint-container-width - $current-hint-size) / 2;
+

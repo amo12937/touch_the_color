@@ -12,14 +12,12 @@ export default class HintContainer extends React.Component {
     )
     return (
       <div className="hint_container">
-        <div className="hint_container_content">
-          <ReactCSSTransitionGroup
-            transitionName="hint_item"
-            transitionEnterTimeout={400}
-            transitionLeaveTimeout={400}>
-            {hints}
-          </ReactCSSTransitionGroup>
-        </div>
+        <ReactCSSTransitionGroup
+          transitionName="hint_item"
+          transitionEnterTimeout={400}
+          transitionLeaveTimeout={400}>
+          {hints}
+        </ReactCSSTransitionGroup>
       </div>
     );
   }

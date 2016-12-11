@@ -1,29 +1,7 @@
-$current-hint-inner-size: 12vmin;
-$current-hint-margin: 1.2vmin;
-$current-hint-size: $current-hint-inner-size + 2 * $current-hint-margin;
-
-$hint-inner-size: 8vmin;
-$hint-margin: 1vmin;
-$hint-size: $hint-inner-size + 2 * $hint-margin;
-
-$hint-container-width: $current-hint-size + 6 * $hint-size;
-$hint-container-height: $current-hint-size;
-
 .hint_container {
-  width: 100%;
-  height: $hint-container-height;
-
-  .hint_container_content {
-    width: $hint-container-width;
-    height: $hint-container-height;
-    box-sizing: border-box;
-    margin: 0 auto;
-    &:after {
-      clear: both;
-    }
-
-    padding: 0 0 0 (3 * $hint-size);
-  }
+  width: $hint-container-width;
+  height: $score-hint-container-height;
+  float: left;
 }
 
 
@@ -31,7 +9,6 @@ $hint-container-height: $current-hint-size;
   transition: all 400ms;
   width: $hint-inner-size;
   height: $hint-inner-size;
-  float: left;
   margin: ($current-hint-inner-size + $current-hint-margin - $hint-inner-size) $hint-margin $current-hint-margin;
 
   &.hint-0 {

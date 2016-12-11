@@ -76,5 +76,7 @@ gulp.task("html", () =>
   });
 })();
 
-gulp.task("dev", gulp.series(gulp.parallel("html", "scripts"), gulp.parallel("browser-sync", "watch")));
+gulp.task("dev", gulp.series(gulp.parallel(
+  "html", "scripts", "styles"
+), gulp.parallel("browser-sync", "watch")));
 

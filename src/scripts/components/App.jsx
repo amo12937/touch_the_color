@@ -3,9 +3,10 @@
 import React from "react"
 
 import Board from "components/board/Board"
-import HintContainer from "components/hint/HintContainer"
+import ScoreHintContainer from "components/ScoreHintContainer"
 
 import Rand from "models/Rand"
+import ScoreModel from "models/Score"
 import HintModel from "models/Hint"
 import TileContainer from "models/TileContainer"
 import TileModel from "models/Tile"
@@ -16,6 +17,7 @@ import wu from "wu"
 export default class App extends React.Component {
   constructor(props) {
     super(props);
+    this.score = new ScoreModel(20);
     this.hintContainer = new HintModel(9, 4, [20], Rand.randIterator);
 
     this.tileContainer = new TileContainer(9, [
@@ -25,7 +27,9 @@ export default class App extends React.Component {
       ))), -1]
     ]);
     var tiles = this.tileContainer.tiles();
+
     this.state = {
+      score: this.score,
       hints: this.hintContainer.hints.map((i) => tiles[i]),
       tiles: tiles,
       failed: {}
@@ -42,11 +46,13 @@ export default class App extends React.Component {
       return
     }
 
+    this.score.count();
     this.tileContainer.select(cellId);
     this.hintContainer.update();
 
     var tiles = this.tileContainer.tiles();
     this.setState({
+      score: this.score,
       hints: this.hintContainer.hints.map((i) => tiles[i]),
       tiles: tiles,
       failed: {}
@@ -56,7 +62,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="app">
-        <HintContainer hints={this.state.hints} />
+        <ScoreHintContainer score={this.state.score} hints={this.state.hints} />
         <Board
           num_of_rows={3}
           num_of_cells={3}

@@ -1,0 +1,87 @@
+.score_hint_container {
+  width: 100%;
+  height: $score-hint-container-height;
+
+  .score_hint_container_content {
+    width: $score-hint-container-width;
+    height: $score-hint-container-height;
+
+    box-sizing: border-box;
+    margin: 0 auto;
+    &:after {
+      clear: both;
+    }
+    display: block;
+  }
+}
+
+.score_container {
+  width: $score-container-width;
+  height: $score-hint-container-height;
+  position: relative;
+  float: left;
+  text-align: bottom;
+
+  background-color: #cccccc;
+  border-radius: 2vmin;
+}
+
+.score {
+  height: ($score-hint-container-height / 2);
+  margin: 0 3vmin;
+
+  position: relative;
+
+  .score_icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    font-size: xx-large;
+  }
+
+  .score_value {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;;
+    font-size: x-large;
+  }
+}
+
+.score_animation-appear {
+  transform: scale(2.0);
+}
+
+.score_animation-appear-active {
+  transition: transform 400ms;
+  transform: scale(1.0);
+}
+
+.score_animation_increased {
+  animation-name: animation-score-increased;
+  animation-duration: 0.5s;
+  animation-timing-function: ease;
+  animation-iteration-count: 1;
+}
+
+@keyframes animation-score-increased {
+  0% {
+    transform: scale(2.0);
+  }
+  100% {
+    transform: scale(1.0);
+  }
+}
+
