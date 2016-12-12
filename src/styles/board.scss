@@ -17,6 +17,17 @@
   margin: $margin;
 }
 
+.board_item-appear {
+  transform: scale(0.5);
+  opacity: 0;
+}
+
+.board_item-appear-active {
+  transition: all 400ms;
+  transform: scale(1);
+  opacity: 1;
+}
+
 .board_item-enter {
   transform: scale(0.5);
   opacity: 0;
@@ -63,6 +74,35 @@
     transform: rotate(-5deg);
   }
   80% {
+    transform: rotate(0deg);
+  }
+}
+
+.board_cell_appeal {
+  animation-name: animation-board-cell_appeal;
+  animation-duration: 1.0s;
+  animation-timing-function: ease;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+}
+
+@keyframes animation-board-cell_appeal {
+  75% {
+    transform: rotate(0deg);
+  }
+  80% {
+    transform: rotate(5deg);
+  }
+  85% {
+    transform: rotate(-5deg);
+  }
+  90% {
+    transform: rotate(5deg);
+  }
+  95% {
+    transform: rotate(-5deg);
+  }
+  100% {
     transform: rotate(0deg);
   }
 }

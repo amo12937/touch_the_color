@@ -13,30 +13,40 @@ export default class App extends React.Component {
     super(props);
     this.game = new Game();
 
-    this.state = {
-      score: this.game.score,
-      hints: this.game.hints(),
-      tiles: this.game.tiles(),
-      failed: {}
-    }
+    this.state = this.getState();
 
     this.handleClick = this.handleClick.bind(this);
+    this.handleTimeup = this.handleTimeup.bind(this);
   }
 
   handleClick(cellId) {
     if (!this.game.select(cellId)) {
       var failed = {};
       failed[cellId] = true;
-      this.setState({failed: failed});
+      this.setState({
+        timer: this.game.timer,
+        failed: failed
+      });
       return
     }
 
-    this.setState({
+    this.setState(this.getState());
+  }
+
+  handleTimeup() {
+    this.game.timeup();
+    this.setState(this.getState());
+  }
+
+  getState() {
+    return {
+      timer: this.game.timer,
       score: this.game.score,
       hints: this.game.hints(),
       tiles: this.game.tiles(),
+      appeals: this.game.appeals(),
       failed: {}
-    });
+    };
   }
 
   render() {
@@ -44,11 +54,12 @@ export default class App extends React.Component {
       <div className="app">
         <div className="app_content">
           <ScoreHintContainer score={this.state.score} hints={this.state.hints} />
-          <Timer />
+          <Timer now={Date.now()} timer={this.state.timer} onTimeup={this.handleTimeup} />
           <Board
             num_of_rows={3}
             num_of_cells={3}
             tiles={this.state.tiles}
+            appeals={this.state.appeals}
             failed={this.state.failed}
             onClick={this.handleClick}
           />

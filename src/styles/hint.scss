@@ -4,6 +4,25 @@
   float: left;
 }
 
+@mixin hint_animation($pos) {
+  position: absolute;
+  transform: translate($pos, 0);
+
+  &.hint_item-leave-active {
+    transform: translate($pos, 0) scale(2);
+    opacity: 0;
+  }
+
+  &.hint_item-enter {
+    transform: translate($pos, 0) scale(0.5);
+    opacity: 0;
+  }
+
+  &.hint_item-enter-active {
+    transform: translate($pos, 0) scale(1);
+    opacity: 1;
+  }
+}
 
 .hint {
   transition: all 400ms;
@@ -12,41 +31,24 @@
   margin: ($current-hint-inner-size + $margin - $hint-inner-size) $margin $margin;
 
   &.hint-0 {
-    position: absolute;
     width: $current-hint-inner-size;
     height: $current-hint-inner-size;
     float: left;
     margin: $margin;
 
-    &.hint_item-leave-active {
-      transform: scale(2);
-      opacity: 0;
-    }
+    @include hint_animation(0);
   }
 
   &.hint-1 {
-    position: absolute;
-    transform: translate($current-hint-size, 0);
+    @include hint_animation($current-hint-size);
   }
 
   &.hint-2 {
-    position: absolute;
-    transform: translate(($current-hint-size + $hint-size), 0);
+    @include hint_animation($current-hint-size + $hint-size);
   }
 
   &.hint-3 {
-    position: absolute;
-    transform: translate(($current-hint-size + 2 * $hint-size), 0);
-
-    &.hint_item-enter {
-      transform: translate(($current-hint-size + 2 * $hint-size), 0) scale(0.5);
-      opacity: 0;
-    }
-
-    &.hint_item-enter-active {
-      transform: translate(($current-hint-size + 2 * $hint-size), 0) scale(1);
-      opacity: 1;
-    }
+    @include hint_animation($current-hint-size + 2 * $hint-size);
   }
 }
 

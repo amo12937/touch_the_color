@@ -4,16 +4,29 @@
   margin: $margin auto;
 }
 
-.timer-back {
+.timer_back {
   width: 100%;
   height: 100%;
   background-color: #cccccc;
   border-radius: 2vmin;
 }
 
-.timer-front {
-  width: 50%;
+.timer_front {
+  width: 0%;
   height: 100%;
   background-color: #ff0000;
   border-radius: 2vmin;
+}
+
+.timer_front-active {
+  animation-name: animation-timer-front;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes animation-timer-front {
+  100% {
+    width: 100%;
+  }
 }

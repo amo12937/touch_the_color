@@ -13,6 +13,7 @@ export default class BoardRow extends React.Component {
           key={"cell_" + cell_id}
           cell_id={cell_id}
           tile={this.props.tiles[cell_id]}
+          appeal={this.props.appeals[cell_id] || false}
           failed={this.props.failed[cell_id] || false}
           onClick={this.props.onClick}
         />

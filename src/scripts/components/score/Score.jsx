@@ -18,7 +18,6 @@ export default class Score extends React.Component {
 
   render () {
     var [prevIcon, prevValue] = this.update();
-    console.log(prevIcon, prevValue, this.props.score.icon, this.props.score.value);
 
     return (
       <div className="score">

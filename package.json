@@ -18,6 +18,7 @@
     "gulp-autoprefixer": "^3.1.1",
     "gulp-sass": "^2.3.2",
     "gulp-webserver": "^0.9.1",
+    "javascript-state-machine": "^2.4.0",
     "react": "^15.4.1",
     "react-addons-css-transition-group": "^15.4.1",
     "react-animate-on-change": "^0.2.1",

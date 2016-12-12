@@ -13,6 +13,7 @@ export default class Board extends React.Component {
           row_id={i}
           num_of_cells={this.props.num_of_cells}
           tiles={this.props.tiles}
+          appeals={this.props.appeals}
           failed={this.props.failed}
           onClick={this.props.onClick}
         />
