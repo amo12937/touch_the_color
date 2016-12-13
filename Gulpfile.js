@@ -9,8 +9,7 @@ var dir = (root) => {
 };
 
 var src = dir("src");
-var dest = dir("dest");
-
+var dest = dir("dev");
 
 ((del = require("del")) =>
   gulp.task("clean", () => del([dest("*")]))
