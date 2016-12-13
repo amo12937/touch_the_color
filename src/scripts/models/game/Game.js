@@ -53,12 +53,12 @@ export default class Game {
   }
 
   _makeHintContainer() {
-    return new HintModel(9, 4, [100], Rand.randIterator);
+    return new HintModel(9, 4, [200], Rand.randIterator);
   }
 
   _makeTileContainer() {
     return new TileContainer(9, [
-      [new Pool(ColorMaster[0].map((color) => new TileModel(color))), 100],
+      [new Pool(ColorMaster[0].map((color) => new TileModel(color))), 200],
       [new Pool([].concat.apply([], ColorMaster[1].map((color) =>
         [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => new TileModel(color, color, i))
       ))), -1]
