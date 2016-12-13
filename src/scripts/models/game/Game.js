@@ -24,9 +24,11 @@ export default class Game {
     this._hintContainer = this._makeHintContainer();
     this._tileContainer = this._makeTileContainer();
 
-    var stateInit = new StateInit(this);
-    var stateStarted = new StateStarted(this);
-    var stateFinished = new StateFinished(this);
+    this.states = {
+      INIT: new StateInit(this),
+      STARTED: new StateStarted(this),
+      FINISHED: new StateFinished(this)
+    };
 
     var self = this;
 
@@ -38,18 +40,18 @@ export default class Game {
         {name: "retry", from: "Finished", to: "Init"}
       ],
       callbacks: {
-        onInit: () => self._state = stateInit,
+        onInit: () => self.state = self.states.INIT,
         onStarted: () => {
           self.timer.start(Date.now());
-          self._state = stateStarted;
+          self.state = self.states.STARTED;
         },
-        onFinished: () => self._state = stateFinished
+        onFinished: () => self.state = self.states.FINISHED
       }
     });
 
     this._fsm = fsm;
 
-    this._state = stateInit;
+    this.state = this.states.INIT;
   }
 
   _makeHintContainer() {
@@ -74,7 +76,7 @@ export default class Game {
     this._tileContainer.select(cellId);
     this._hintContainer.update();
   }
-  select(cellId) { return this._state.select(cellId); }
+  select(cellId) { return this.state.select(cellId); }
 
   hints() {
     var tiles = this.tiles();
@@ -82,6 +84,6 @@ export default class Game {
   }
   tiles() { return this._tileContainer.tiles(); }
 
-  appeals() { return this._state.appeals(); }
+  appeals() { return this.state.appeals(); }
 }
 

@@ -24,6 +24,7 @@ export default class App extends React.Component {
       var failed = {};
       failed[cellId] = true;
       this.setState({
+        gameState: this.game.state,
         timer: this.game.timer,
         failed: failed
       });
@@ -40,6 +41,8 @@ export default class App extends React.Component {
 
   getState() {
     return {
+      gameState: this.game.state,
+      gameStates: this.game.states,
       timer: this.game.timer,
       score: this.game.score,
       hints: this.game.hints(),
@@ -54,7 +57,13 @@ export default class App extends React.Component {
       <div className="app">
         <div className="app_content">
           <ScoreHintContainer score={this.state.score} hints={this.state.hints} />
-          <Timer now={Date.now()} timer={this.state.timer} onTimeup={this.handleTimeup} />
+          <Timer
+            gameState={this.state.gameState}
+            gameStates={this.state.gameStates}
+            now={Date.now()}
+            timer={this.state.timer}
+            onTimeup={this.handleTimeup}
+          />
           <Board
             num_of_rows={3}
             num_of_cells={3}

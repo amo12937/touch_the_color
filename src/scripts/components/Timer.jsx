@@ -31,8 +31,9 @@ class TimerActive extends React.Component {
 
 class TimerWaiting extends React.Component {
   render() {
+    var width = this.props.gameState == this.props.gameStates.INIT ? 0 : 100;
     return (
-      <div className="timer_front"></div>
+      <div className="timer_front" style={{width:"" + width + "%"}}></div>
     );
   }
 }
@@ -41,12 +42,15 @@ export default class Timer extends React.Component {
   render() {
     var now = this.props.now;
     var timer = this.props.timer;
-    var child = timer.isStopped(now)
-      ? <TimerWaiting />
-      : <TimerActive
+    console.log(this.props.gameState, this.props.gameStates.STARTED, this.props.gameState == this.props.gameStates.STARTED);
+    var child = this.props.gameState == this.props.gameStates.STARTED
+      ? <TimerActive
         key={Math.random()}
         now={now} timer={timer}
         onTimeup={this.props.onTimeup} />
+      : <TimerWaiting
+        gameState={this.props.gameState}
+        gameStates={this.props.gameStates} />
 
     return (
       <div className="timer">
