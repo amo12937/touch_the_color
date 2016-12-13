@@ -17,6 +17,14 @@ var dest = dir("dest");
 )();
 
 /***************************
+ * README                  *
+ ***************************/
+gulp.task("README", () =>
+  gulp.src(src("README.md"))
+  .pipe(gulp.dest(dest("")))
+);
+
+/***************************
  * html                    *
  ***************************/
 gulp.task("html", () =>
@@ -73,6 +81,9 @@ gulp.task("html", () =>
   gulp.task("reload", browserSync.reload);
 
   gulp.task("watch", () => {
+    gulp.watch(src("README.md"))
+      .on("change", gulp.series("README"));
+
     gulp.watch(src("index.html"))
       .on("change", gulp.series("html", "reload"));
 
@@ -84,7 +95,9 @@ gulp.task("html", () =>
   });
 })();
 
-gulp.task("dev", gulp.series("clean", gulp.parallel(
-  "html", "scripts", "styles"
-), gulp.parallel("browser-sync", "watch")));
+gulp.task("build", gulp.series("clean", gulp.parallel(
+  "README", "html", "scripts", "styles"
+)));
+
+gulp.task("dev", gulp.series("build", gulp.parallel("browser-sync", "watch")));
 
