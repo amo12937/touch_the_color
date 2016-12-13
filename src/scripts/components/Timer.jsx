@@ -44,7 +44,7 @@ export default class Timer extends React.Component {
     var child = timer.isStopped(now)
       ? <TimerWaiting />
       : <TimerActive
-        key={timer.remain(now)}
+        key={Math.random()}
         now={now} timer={timer}
         onTimeup={this.props.onTimeup} />
 
