@@ -3,11 +3,12 @@
 import wu from "wu"
 
 export default class Hint {
-  constructor(total, hintSize, resetRule = [], randIterator) {
+  constructor(tileSize, hintSize, randIterator) {
     var hints = Array.from(wu.count().take(hintSize));
-    var pool = Array.from(wu.count(hintSize).take(total - hintSize));
-    var resetter = Array.from(wu.count().take(total - hintSize));
-    var rs = randIterator(pool.length);
+    var poolSize = tileSize - hintSize;
+    var pool = Array.from(wu.count(hintSize).take(poolSize));
+    var resetter = Array.from(wu.count().take(poolSize));
+    var rs = randIterator(poolSize);
 
     var getNext = (r) => {
       var x = hints.shift();
@@ -19,12 +20,13 @@ export default class Hint {
     rs.take(hintSize).forEach(getNext);
 
     this.hints = hints;
-    this.update = wu.chain(
-      wu(resetRule).map((m) => m - total).filter((m) => m >= 0).map((m) =>
-        [rs.take(m), resetter, rs.take(hintSize)]
-      ).flatten(),
-      rs
-    ).map(getNext).next;
+    this.cleanup = () => {
+      rs = wu.chain(resetter, rs);
+    }
+
+    this.update = () => {
+      getNext(rs.next().value);
+    }
   }
 
   canUpdate(cellId) {

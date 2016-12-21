@@ -20,7 +20,10 @@ import StateFinished from "models/game/states/Finished"
 export default class Game {
   constructor() {
     this.timer = new TimerModel(5000);
+
     this.score = new Score(0);
+
+    this._scoreTable = this._makeScoreTable();
     this._hintContainer = this._makeHintContainer();
     this._tileContainer = this._makeTileContainer();
 
@@ -54,16 +57,20 @@ export default class Game {
     this.state = this.states.INIT;
   }
 
+  _makeScoreTable() {
+    return [20];
+  }
+
   _makeHintContainer() {
-    return new HintModel(9, 4, [200], Rand.randIterator);
+    return new HintModel(9, 4, Rand.randIterator);
   }
 
   _makeTileContainer() {
     return new TileContainer(9, [
-      [new Pool(ColorMaster[0].map((color) => new TileModel(color))), 200],
-      [new Pool([].concat.apply([], ColorMaster[1].map((color) =>
+      new Pool(ColorMaster[0].map((color) => new TileModel(color))),
+      new Pool([].concat.apply([], ColorMaster[1].map((color) =>
         [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => new TileModel(color, color, i))
-      ))), -1]
+      )))
     ]);
   }
 
@@ -73,6 +80,11 @@ export default class Game {
   _update(cellId) {
     this.timer.add(Date.now(), 1000);
     this.score.count();
+    if (this._scoreTable.length > 0 && this.score.current.value >= this._scoreTable[0]) {
+      this._scoreTable.shift();
+      this._tileContainer.updatePoolPointer();
+      this._hintContainer.cleanup();
+    }
     this._tileContainer.select(cellId);
     this._hintContainer.update();
   }

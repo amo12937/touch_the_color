@@ -42,7 +42,6 @@ export default class Timer extends React.Component {
   render() {
     var now = this.props.now;
     var timer = this.props.timer;
-    console.log(this.props.gameState, this.props.gameStates.STARTED, this.props.gameState == this.props.gameStates.STARTED);
     var child = this.props.gameState == this.props.gameStates.STARTED
       ? <TimerActive
         key={Math.random()}
