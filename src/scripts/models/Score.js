@@ -4,22 +4,22 @@ import ScoreValue from "models/ScoreValue"
 
 var scoreIcons = {
   table: [
-    [20,    "♙"],  // pawn
-    [100,   "♘"],  // knight
-    [500,   "♗"],  // bishop
-    [2500,  "♖"],  // rook
-    [12500, "♕"],  // queen
+    [200,    "♙"],  // pawn
+    [1000,   "♘"],  // knight
+    [5000,   "♗"],  // bishop
+    [25000,  "♖"],  // rook
+    [125000, "♕"],  // queen
   ],
   last: "♔"        // king
 };
 
 var bestIcons = {
   table: [
-    [20,    "♟"],  // pawn
-    [100,   "♞"],  // knight
-    [500,   "♝"],  // bishop
-    [2500,  "♜"],  // rook
-    [12500, "♛"],  // queen
+    [200,    "♟"],  // pawn
+    [1000,   "♞"],  // knight
+    [5000,   "♝"],  // bishop
+    [25000,  "♜"],  // rook
+    [125000, "♛"],  // queen
   ],
   last: "♚"        // king
 };

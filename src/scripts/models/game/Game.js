@@ -58,7 +58,7 @@ export default class Game {
   }
 
   _makeScoreTable() {
-    return [20];
+    return [1000];
   }
 
   _makeHintContainer() {
@@ -77,9 +77,19 @@ export default class Game {
   retry() { this._fsm.retly(); }
   timeup() { this._fsm.timeup(); }
 
+  _getScore(now) {
+    if (this.timer.isStopped(now)) return 10;
+    var percent = this.timer.percent(now);
+    if (percent <  5) return 10;
+    if (percent < 25) return 5;
+    if (percent < 50) return 3;
+    return 1;
+  }
+
   _update(cellId) {
-    this.timer.add(Date.now(), 1000);
-    this.score.count();
+    var now = Date.now();
+    this.score.count(this._getScore(now));
+    this.timer.add(now, 1000);
     if (this._scoreTable.length > 0 && this.score.current.value >= this._scoreTable[0]) {
       this._scoreTable.shift();
       this._tileContainer.updatePoolPointer();
