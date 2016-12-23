@@ -2,7 +2,7 @@
 
 import Rand from "models/Rand"
 
-import Score from "models/Score"
+import Score from "models/score/Score"
 import HintModel from "models/Hint"
 import TileContainer from "models/TileContainer"
 import TileModel from "models/Tile"

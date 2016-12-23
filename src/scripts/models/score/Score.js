@@ -1,6 +1,6 @@
 "use strict";
 
-import ScoreValue from "models/ScoreValue"
+import ScoreValue from "models/score/ScoreValue"
 
 var scoreIcons = {
   table: [
