@@ -1,29 +1,44 @@
 "use strict";
 
+/*
+ *  waiting    | running                      | finished
+ * ------------|------------*-----------------|------------
+ *             `startTime   `currentTime      `endTime
+ */
+
 export default class Timer {
   constructor(max) {
     this.max = max;
-    this.stoppedTime = 0;
+    this.reset();
   }
 
-  start(currentTime) {
-    if (!this.isStopped(currentTime)) return;
-    this.stoppedTime = currentTime + this.max;
+  start(startTime) {
+    if (this.isRunning(startTime)) return;
+    this.restart(startTime);
+  }
+
+  restart(startTime) {
+    this.startTime = startTime;
+    this.endTime = startTime + this.max;
+  }
+
+  reset() {
+    this.restart(Infinity);
   }
 
   add(currentTime, msec) {
-    if (this.isStopped(currentTime)) return false;
-    this.stoppedTime = Math.min(this.stoppedTime + msec, currentTime + this.max);
+    if (!this.isRunning(currentTime)) return false;
+    this.restart(Math.min(this.startTime + msec, currentTime));
 
-    return !this.isStopped(currentTime)
+    return this.isRunning(currentTime)
   }
 
-  isStopped(currentTime) {
-    return this.stoppedTime < currentTime;
+  isRunning(currentTime) {
+    return this.startTime <= currentTime && currentTime < this.endTime;
   }
 
   remain(currentTime) {
-    return Math.max(0, this.stoppedTime - currentTime);
+    return Math.min(this.max, Math.max(0, this.endTime - currentTime));
   }
 
   percent(currentTime) {
