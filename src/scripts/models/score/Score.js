@@ -25,7 +25,9 @@ var bestIcons = {
 };
 
 export default class Score {
-  constructor(best) {
+  constructor(storage) {
+    var best = 1 * storage.getItem("best");
+    this._storage = storage;
     this.current = new ScoreValue(0, scoreIcons.table, scoreIcons.last);
     this.best = new ScoreValue(best, bestIcons.table, bestIcons.last);
   }
@@ -36,8 +38,10 @@ export default class Score {
 
   count (n = 1) {
     this.current.update(this.current.value + n);
-    if (this.best.value < this.current.value)
+    if (this.best.value < this.current.value) {
       this.best.update(this.current.value);
+      this._storage.setItem("best", this.current.value);
+    }
   }
 }
 

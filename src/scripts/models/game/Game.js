@@ -11,6 +11,7 @@ import TimerModel from "models/Timer"
 import Color from "models/Color"
 import ColorMaster from "models/ColorMaster"
 import Pool from "models/Pool"
+import PrefixStorage from "models/PrefixStorage"
 import wu from "wu"
 
 import StateMachine from "javascript-state-machine"
@@ -23,7 +24,8 @@ export default class Game {
   constructor() {
     this.timer = new TimerModel(5000);
 
-    this.score = new Score(0);
+    var storage = new PrefixStorage(localStorage, "touch_the_color/");
+    this.score = new Score(storage);
 
     this.scoreTable = this._makeScoreTable();
     this._tileUpdationRule = this._makeTileUpdationRule();
