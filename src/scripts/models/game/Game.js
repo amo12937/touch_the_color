@@ -3,10 +3,12 @@
 import Rand from "models/Rand"
 
 import Score from "models/score/Score"
+import ScoreTable from "models/score/ScoreTable"
 import HintModel from "models/Hint"
 import TileContainer from "models/TileContainer"
 import TileModel from "models/Tile"
 import TimerModel from "models/Timer"
+import Color from "models/Color"
 import ColorMaster from "models/ColorMaster"
 import Pool from "models/Pool"
 import wu from "wu"
@@ -23,7 +25,8 @@ export default class Game {
 
     this.score = new Score(0);
 
-    this._scoreTable = this._makeScoreTable();
+    this.scoreTable = this._makeScoreTable();
+    this._tileUpdationRule = this._makeTileUpdationRule();
     this._hintContainer = this._makeHintContainer();
     this._tileContainer = this._makeTileContainer();
 
@@ -58,6 +61,14 @@ export default class Game {
   }
 
   _makeScoreTable() {
+    return new ScoreTable([
+      {percent: 10, score: 10, color: new Color(0x3B, 0xF4, 0x2E)},
+      {percent: 25, score:  5, color: new Color(0xFD, 0xE8, 0x4C)},
+      {percent: 50, score:  3, color: new Color(0xFE, 0xA3, 0x42)}
+    ], {score: 1, color: new Color(0xFF, 0x5F, 0x38)});
+  }
+
+  _makeTileUpdationRule() {
     return [1000];
   }
 
@@ -77,19 +88,12 @@ export default class Game {
   retry() { this._fsm.retly(); }
   timeup() { this._fsm.timeup(); }
 
-  _getScore(percent) {
-    if (percent <  5) return 10;
-    if (percent < 25) return 5;
-    if (percent < 50) return 3;
-    return 1;
-  }
-
   _update(cellId) {
     var now = Date.now();
-    this.score.count(this._getScore(this.timer.percent(now)));
+    this.score.count(this.scoreTable.getScore(this.timer.percent(now)));
     this.timer.add(now, 1000);
-    if (this._scoreTable.length > 0 && this.score.current.value >= this._scoreTable[0]) {
-      this._scoreTable.shift();
+    if (this._tileUpdationRule.length > 0 && this.score.current.value >= this._tileUpdationRule[0]) {
+      this._tileUpdationRule.shift();
       this._tileContainer.updatePoolPointer();
       this._hintContainer.cleanup();
     }

@@ -54,7 +54,7 @@ export default class Timer extends React.Component {
     return (
       <div className="timer">
         <div className="timer_back">
-        {child}
+          {child}
         </div>
       </div>
     );
