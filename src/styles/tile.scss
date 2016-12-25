@@ -8,10 +8,10 @@
   .tile_content {
     /* to expand div*/
     position: absolute;
-    top: 10%;
-    right: 10%;
-    bottom: 10%;
-    left: 10%;
+    top: 1vmin;
+    right: 1vmin;
+    bottom: 1vmin;
+    left: 1vmin;
 
     /* to centerize text */
     display: flex;
@@ -23,6 +23,6 @@
 
     font-size: xx-large;
 
-    border-radius: 16%;
+    border-radius: calc(20% - 0.5vmin);
   }
 }
