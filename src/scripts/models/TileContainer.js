@@ -4,39 +4,31 @@ import wu from "wu"
 
 export default class TileContainer {
   constructor(size, poolList) {
-    this._size = size;
-    this._cp = 0; // currentPool
-    this._poolList = poolList;
-    var pool = this._currentPool();
-    this._tiles = Array.from(wu.repeat(0).take(size).map(() => pool.borrow()));
-  }
+    var cp = 0;
 
-  updatePoolPointer() {
-    this._cp = Math.min(this._cp + 1, this._poolList.length - 1);
-  }
+    this.updatePoolPointer = () => {
+      cp = Math.min(cp + 1, poolList.length - 1);
+    }
 
-  resetPoolPointer() {
-    this._cp = 0;
-  }
+    this.resetPoolPointer = () => {
+      cp = 0;
+    }
 
-  _currentPool() {
-    return this._poolList[this._cp];
-  }
+    var tiles = ((pool) =>
+      Array.from(wu.count().take(size).map(() => pool.borrow()))
+    )(poolList[cp]);
 
-  trySelect(i) {
-    return 0 <= i && i < this._size;
-  }
+    this.trySelect = (i) => 0 <= i && i < size;
 
-  select(i) {
-    if (!this.trySelect(i)) return false;
-    var oldItem = this._tiles[i];
-    this._tiles[i] = this._currentPool().borrow();
-    oldItem.backToPool();
-    return true
-  }
+    this.select = (i) => {
+      if (!this.trySelect(i)) return false;
+      var oldItem = tiles[i];
+      tiles[i] = poolList[cp].borrow();
+      oldItem.backToPool();
+      return true;
+    }
 
-  tiles() {
-    return this._tiles.map((tile) => tile.item);
+    this.tiles = () => tiles.map((tile) => tile.item);
   }
 }
 

@@ -11,10 +11,10 @@ class PoolItem {
 
 export default class Pool {
   constructor(items) {
-    var self = this;
-    this._poolItems = items.map((item) =>
-      new PoolItem(item, (poolItem) => () => self._poolItems.push(poolItem))
-    );
+    var backToPool = (
+      (poolItem) => () => this._poolItems.push(poolItem)
+    ).bind(this);
+    this._poolItems = items.map((item) => new PoolItem(item, backToPool));
   }
 
   borrow() {
