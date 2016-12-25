@@ -3,18 +3,22 @@
 export default class Init {
   constructor (game) {
     this._game = game;
-    this._firstCellId = game._hintContainer.hints[0];
-    this._appeals = {};
-    this._appeals[this._firstCellId] = true;
   }
 
   select(cellId) {
-    if (cellId != this._firstCellId) return false;
+    var firstCellId = this._game._hintContainer.hints[0];
+    if (cellId != firstCellId) return false;
     this._game._update(cellId);
     this._game._fsm.start();
     return true;
   }
 
-  appeals() { return this._appeals; }
+  appeals() {
+    var appeals = {};
+    var firstCellId = this._game._hintContainer.hints[0];
+    appeals[firstCellId] = true;
+
+    return appeals;
+  }
 }
 

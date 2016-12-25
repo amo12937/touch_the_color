@@ -27,11 +27,6 @@ export default class Game {
     var storage = new PrefixStorage(localStorage, "touch_the_color/");
     this.score = new Score(storage);
 
-    this.scoreTable = this._makeScoreTable();
-    this._tileUpdationRule = this._makeTileUpdationRule();
-    this._hintContainer = this._makeHintContainer();
-    this._tileContainer = this._makeTileContainer();
-
     this.states = {
       INIT: new StateInit(this),
       STARTED: new StateStarted(this),
@@ -48,7 +43,14 @@ export default class Game {
         {name: "retry", from: "Finished", to: "Init"}
       ],
       callbacks: {
-        onInit: () => self.state = self.states.INIT,
+        onInit: () => {
+          self.score.reset();
+          self.scoreTable = self._makeScoreTable();
+          self._tileUpdationRule = self._makeTileUpdationRule();
+          self._hintContainer = self._makeHintContainer();
+          self._tileContainer = self._makeTileContainer();
+          self.state = self.states.INIT;
+        },
         onStarted: () => {
           self.timer.start(Date.now());
           self.state = self.states.STARTED;
@@ -58,8 +60,6 @@ export default class Game {
     });
 
     this._fsm = fsm;
-
-    this.state = this.states.INIT;
   }
 
   _makeScoreTable() {
@@ -87,7 +87,7 @@ export default class Game {
     ]);
   }
 
-  retry() { this._fsm.retly(); }
+  retry() { this._fsm.retry(); }
   timeup() { this._fsm.timeup(); }
 
   _update(cellId) {

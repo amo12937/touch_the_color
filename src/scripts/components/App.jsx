@@ -17,6 +17,7 @@ export default class App extends React.Component {
 
     this.handleClick = this.handleClick.bind(this);
     this.handleTimeup = this.handleTimeup.bind(this);
+    this.handleRetry = this.handleRetry.bind(this);
   }
 
   handleClick(cellId) {
@@ -36,6 +37,11 @@ export default class App extends React.Component {
 
   handleTimeup() {
     this.game.timeup();
+    this.setState(this.getState());
+  }
+
+  handleRetry() {
+    this.game.retry();
     this.setState(this.getState());
   }
 
@@ -73,6 +79,7 @@ export default class App extends React.Component {
             onClick={this.handleClick}
           />
         </div>
+        <div onClick={this.handleRetry}>retry</div>
       </div>
     );
   }
