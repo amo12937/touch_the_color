@@ -48,7 +48,7 @@ export default class Game {
           self.scoreTable = self._makeScoreTable();
           self._tileUpdationRule = self._makeTileUpdationRule();
           self._hintContainer = self._makeHintContainer();
-          self._tileContainer = self._makeTileContainer();
+          self._tileContainer = self._makeTileContainer(self._tileUpdationRule.shift().pool);
           self.state = self.states.INIT;
         },
         onStarted: () => {
@@ -71,20 +71,23 @@ export default class Game {
   }
 
   _makeTileUpdationRule() {
-    return [1000];
+    return [{
+      score: 0,
+      pool: new Pool(ColorMaster[0].map((color) => new TileModel(color)))
+    }, {
+      score: 1000,
+      pool: new Pool([].concat.apply([], ColorMaster[1].map((color) =>
+        [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => new TileModel(color, color, i))
+      )))
+    }];
   }
 
   _makeHintContainer() {
     return new HintModel(9, 4, Rand.randIterator);
   }
 
-  _makeTileContainer() {
-    return new TileContainer(9, [
-      new Pool(ColorMaster[0].map((color) => new TileModel(color))),
-      new Pool([].concat.apply([], ColorMaster[1].map((color) =>
-        [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => new TileModel(color, color, i))
-      )))
-    ]);
+  _makeTileContainer(pool) {
+    return new TileContainer(9, pool);
   }
 
   retry() { this._fsm.retry(); }
@@ -94,9 +97,8 @@ export default class Game {
     var now = Date.now();
     this.score.count(this.scoreTable.getScore(this.timer.percent(now)));
     this.timer.add(now, 1000);
-    if (this._tileUpdationRule.length > 0 && this.score.current.value >= this._tileUpdationRule[0]) {
-      this._tileUpdationRule.shift();
-      this._tileContainer.updatePoolPointer();
+    if (this._tileUpdationRule.length > 0 && this.score.current.value >= this._tileUpdationRule[0].score) {
+      this._tileContainer.updatePool(this._tileUpdationRule.shift().pool);
       this._hintContainer.cleanup();
     }
     this._tileContainer.select(cellId);
