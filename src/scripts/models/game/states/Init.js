@@ -20,5 +20,8 @@ export default class Init {
 
     return appeals;
   }
+
+  retry() {}
+  timeup() {}
 }
 

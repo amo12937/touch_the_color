@@ -21,7 +21,7 @@ export default class App extends React.Component {
   }
 
   handleClick(cellId) {
-    if (!this.game.select(cellId)) {
+    if (!this.game.select(cellId, Date.now())) {
       var failed = {};
       failed[cellId] = true;
       this.setState({
@@ -36,7 +36,7 @@ export default class App extends React.Component {
   }
 
   handleTimeup() {
-    this.game.timeup();
+    this.game.timeup(Date.now());
     this.setState(this.getState());
   }
 

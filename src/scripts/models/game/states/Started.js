@@ -13,9 +13,17 @@ export default class Started {
       return true;
     }
 
-    if (!game.timer.add(now, -1500)) game.timeup();
+    game.timer.add(now, -1500);
+    game.timeup(now);
     return false;
   }
 
   appeals() { return this._appeals; }
+
+  retry() {}
+
+  timeup(now) {
+    var game = this._game;
+    if (game.timer.isFinished(now)) game._fsm.timeup();
+  }
 }

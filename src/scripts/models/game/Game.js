@@ -45,6 +45,7 @@ export default class Game {
       callbacks: {
         onInit: () => {
           self.score.reset();
+          self.timer.reset();
           self.scoreTable = self._makeScoreTable();
           self._tileUpdationRule = self._makeTileUpdationRule();
           self._hintContainer = self._makeHintContainer();
@@ -90,8 +91,8 @@ export default class Game {
     return new TileContainer(9, pool);
   }
 
-  retry() { this._fsm.retry(); }
-  timeup() { this._fsm.timeup(); }
+  retry() { this.state.retry(); }
+  timeup(now) { this.state.timeup(now) }
 
   _update(cellId, now) {
     this.score.count(this.scoreTable.getScore(this.timer.percent(now)));
@@ -103,7 +104,7 @@ export default class Game {
     this._tileContainer.select(cellId);
     this._hintContainer.update();
   }
-  select(cellId) { return this.state.select(cellId, Date.now()); }
+  select(cellId, now) { return this.state.select(cellId, now); }
 
   hints() {
     var tiles = this.tiles();

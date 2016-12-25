@@ -1,7 +1,8 @@
 "use strict";
 
 export default class Finished {
-  constructor () {
+  constructor (game) {
+    this._game = game;
     this._appeals = {};
   }
   select() {
@@ -9,4 +10,10 @@ export default class Finished {
   }
 
   appeals() { return this._appeals; }
+
+  retry() {
+    this._game._fsm.retry();
+  }
+
+  timeup() {}
 }
