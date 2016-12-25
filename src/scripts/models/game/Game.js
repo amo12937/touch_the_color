@@ -93,8 +93,7 @@ export default class Game {
   retry() { this._fsm.retry(); }
   timeup() { this._fsm.timeup(); }
 
-  _update(cellId) {
-    var now = Date.now();
+  _update(cellId, now) {
     this.score.count(this.scoreTable.getScore(this.timer.percent(now)));
     this.timer.add(now, 1000);
     if (this._tileUpdationRule.length > 0 && this.score.current.value >= this._tileUpdationRule[0].score) {
@@ -104,7 +103,7 @@ export default class Game {
     this._tileContainer.select(cellId);
     this._hintContainer.update();
   }
-  select(cellId) { return this.state.select(cellId); }
+  select(cellId) { return this.state.select(cellId, Date.now()); }
 
   hints() {
     var tiles = this.tiles();

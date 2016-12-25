@@ -5,10 +5,10 @@ export default class Init {
     this._game = game;
   }
 
-  select(cellId) {
+  select(cellId, now) {
     var firstCellId = this._game._hintContainer.hints[0];
     if (cellId != firstCellId) return false;
-    this._game._update(cellId);
+    this._game._update(cellId, now);
     this._game._fsm.start();
     return true;
   }
