@@ -22,8 +22,8 @@ class TimerActive extends React.Component {
 
     return (
       <div className="timer_front timer_front-active" style={{
-        width: timer.percent(now) + "%",
-        animationDuration: timer.remain(now) + "ms",
+        animationDuration: timer.max + "ms",
+        animationDelay: "-" + timer.elapsedTime(now) + "ms"
       }}></div>
     );
   }

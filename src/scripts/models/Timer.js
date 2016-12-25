@@ -37,6 +37,10 @@ export default class Timer {
     return this.startTime <= currentTime && currentTime < this.endTime;
   }
 
+  elapsedTime(currentTime) {
+    return Math.min(this.max, Math.max(0, currentTime - this.startTime));
+  }
+
   remain(currentTime) {
     return Math.min(this.max, Math.max(0, this.endTime - currentTime));
   }

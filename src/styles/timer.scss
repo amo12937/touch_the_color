@@ -7,15 +7,16 @@
 .timer_back {
   width: 100%;
   height: 100%;
-  background-color: #cccccc;
-  border-radius: 2vmin;
+  background-color: $timer-back-color;
+  border-radius: ($timer-inner-height / 2);
+  overflow: hidden;
 }
 
 .timer_front {
   width: 0%;
   height: 100%;
-  background-color: #ff0000;
-  border-radius: 2vmin;
+  background-color: $timer-color4;
+  border-radius: ($timer-inner-height / 2);
 }
 
 .timer_front-active {
@@ -26,7 +27,33 @@
 }
 
 @keyframes animation-timer-front {
+  0% {
+    width: 0%;
+    background-color: $timer-color1;
+  }
+  9.9% {
+    background-color: $timer-color1;
+  }
+
+  10% {
+    background-color: $timer-color2;
+  }
+  24.9% {
+    background-color: $timer-color2;
+  }
+
+  25% {
+    background-color: $timer-color3;
+  }
+  49.9% {
+    background-color: $timer-color3;
+  }
+
+  50% {
+    background-color: $timer-color4;
+  }
   100% {
     width: 100%;
+    background-color: $timer-color4;
   }
 }

@@ -22,6 +22,11 @@ $score-hint-container-inner-height: $score-hint-container-height - 2 * $margin;
 $timer-width: 77vmin;
 $timer-height: 3vmin;
 $timer-inner-height: $timer-height - 2 * $margin;
+$timer-back-color: #cccccc;
+$timer-color1: #4f92ff;
+$timer-color2: #3bf42e;
+$timer-color3: #fde84c;
+$timer-color4: #ff5f38;
 
 $board-cell-size: 27vmin;
 $board-cell-inner-size: $board-cell-size - 2 * $margin;
