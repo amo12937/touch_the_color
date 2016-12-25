@@ -64,10 +64,10 @@ export default class Game {
 
   _makeScoreTable() {
     return new ScoreTable([
-      {percent: 10, score: 10, color: new Color(0x3B, 0xF4, 0x2E)},
-      {percent: 25, score:  5, color: new Color(0xFD, 0xE8, 0x4C)},
-      {percent: 50, score:  3, color: new Color(0xFE, 0xA3, 0x42)}
-    ], {score: 1, color: new Color(0xFF, 0x5F, 0x38)});
+      {percent: 10, score: 10},
+      {percent: 25, score:  5},
+      {percent: 50, score:  3}
+    ], {score: 1});
   }
 
   _makeTileUpdationRule() {
