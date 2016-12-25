@@ -1,0 +1,64 @@
+.game-over {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.game-over-enter {
+  transition: opacity 2s;
+  opacity: 0;
+}
+
+.game-over-enter-active {
+  opacity: 1;
+}
+
+.game-over-leave {
+  transition: all 400ms;
+}
+
+.game-over-leave-active {
+  opacity: 0;
+  transform: scale(2);
+}
+
+.game-over-outer {
+  position: absolute;
+  width: $app-width;
+  height: $app-height;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.game-over-inner {
+  width: $board-size;
+  height: $board-size;
+  margin: ($app-height - $board-size) auto auto;
+  position: relative;
+}
+
+.game-over-retry {
+  width: $retry-width;
+  height: $retry-height;
+  background-color: #f8f8f8;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  text-align: center;
+  border: 1vmin solid #333333;
+  border-radius: $retry-border-radius;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: x-large;
+}
+

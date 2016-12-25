@@ -32,3 +32,7 @@ $board-cell-size: 27vmin;
 $board-cell-inner-size: $board-cell-size - 2 * $margin;
 $board-size: $board-cell-size * 3;
 
+$retry-width: 30vmin;
+$retry-height: 12vmin;
+$retry-border-radius: 3vmin;
+

@@ -1,10 +1,12 @@
 "use strict";
 
 import React from "react"
+import ReactCSSTransitionGroup from "react-addons-css-transition-group"
 
 import ScoreHintContainer from "components/ScoreHintContainer"
 import Timer from "components/Timer"
 import Board from "components/board/Board"
+import GameOver from "components/GameOver"
 
 import Game from "models/game/Game"
 
@@ -59,6 +61,9 @@ export default class App extends React.Component {
   }
 
   render() {
+    var gameOver = this.state.gameState == this.state.gameStates.FINISHED &&
+      <GameOver onClickRetry={this.handleRetry} />;
+
     return (
       <div className="app">
         <div className="app_content">
@@ -79,7 +84,12 @@ export default class App extends React.Component {
             onClick={this.handleClick}
           />
         </div>
-        <div onClick={this.handleRetry}>retry</div>
+        <ReactCSSTransitionGroup
+          transitionName="game-over"
+          transitionEnterTimeout={2000}
+          transitionLeaveTimeout={400}>
+          {gameOver}
+        </ReactCSSTransitionGroup>
       </div>
     );
   }
