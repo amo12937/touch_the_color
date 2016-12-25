@@ -1,8 +1,5 @@
 "use strict";
 
-import Tile from "models/Tile"
-import Color from "models/Color"
-
 export default class Init {
   constructor (game) {
     this._game = game;
