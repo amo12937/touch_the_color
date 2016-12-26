@@ -16,10 +16,8 @@ export default class GameOver extends React.Component {
   render() {
     return (
       <div className="game-over">
-        <div className="game-over-outer">
-          <div className="game-over-inner">
-            <div className="game-over-retry" onClick={this.handleClickRetry}>retry</div>
-          </div>
+        <div className="game-over-inner">
+          <div className="game-over-retry" onClick={this.handleClickRetry}>retry</div>
         </div>
       </div>
     );

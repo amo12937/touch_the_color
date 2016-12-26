@@ -1,6 +1,3 @@
-$app-width: 100vmin;
-$app-height: 100vmin;
-
 $margin: 1vmin;
 
 $current-hint-size: 16vmin;
@@ -32,7 +29,23 @@ $board-cell-size: 27vmin;
 $board-cell-inner-size: $board-cell-size - 2 * $margin;
 $board-size: $board-cell-size * 3;
 
-$retry-width: 30vmin;
-$retry-height: 12vmin;
+$retry-width: 72vmin;
+$retry-height: 6vmin;
 $retry-border-radius: 3vmin;
+
+/* layout */
+$logo-width: 75vmin;
+$logo-height: 15vmin;
+$logo-padding-top-portrait: calc(50vh - 65vmin); // 50vh - 50vmin - 15vmin;
+$logo-padding-top-landscape: calc(50vh - 50vmin);
+
+$app-width: 100vmin;
+$app-height: 100vmin;
+$app-content-padding-portrait: $logo-height;
+$app-content-padding-landscape: 0;
+
+$game-over-width: 72vmin;
+$game-over-height: 24vmin;
+$game-over-padding-portrait: $app-content-padding-portrait + $app-height + $margin;
+$game-over-padding-landscape: $app-content-padding-landscape + $score-hint-container-height + $timer-height + ($board-size - $game-over-height) / 2;
 

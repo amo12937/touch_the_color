@@ -1,18 +1,29 @@
 .app {
   width: 100%;
   height: 100%;
-  position: relative;
 }
 
 .app_content {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-
   width: $app-width;
   height: $app-height;
-  margin: auto;
+  margin: 0 auto;
+  padding-top: $app-content-padding-portrait;
+}
+
+.game-over-inner {
+  width: $game-over-width;
+  height: $game-over-height;
+  padding-top: $game-over-padding-portrait;
+  margin: 0 auto;
+}
+
+@media screen and (min-aspect-ratio: 2/3) {
+  .app_content {
+    padding-top: $app-content-padding-landscape;
+  }
+
+  .game-over-inner {
+    padding-top: $game-over-padding-landscape
+  }
 }
 
