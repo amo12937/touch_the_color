@@ -2,8 +2,9 @@ var gulp = require("gulp");
 
 var dir = (root) => {
   var self = (path) => `${root}/${path}`;
-  self.scripts = (path) => self(`scripts/${path}`)
-  self.styles = (path) => self(`styles/${path}`)
+  ["scripts", "styles", "images"].map((subdir) => {
+    self[subdir] = (path) => self(`${subdir}/${path}`)
+  });
 
   return self;
 };
@@ -72,6 +73,16 @@ gulp.task("html", () =>
 })();
 
 /***************************
+ * images                  *
+ ***************************/
+(() => {
+  gulp.task("images", () =>
+    gulp.src(src.images("**/*.svg"))
+    .pipe(gulp.dest(dest.images("")))
+  )
+})();
+
+/***************************
  * watch                   *
  ***************************/
 ((browserSync = require("browser-sync")) => {
@@ -95,7 +106,7 @@ gulp.task("html", () =>
 })();
 
 gulp.task("build", gulp.series("clean", gulp.parallel(
-  "README", "html", "scripts", "styles"
+  "README", "html", "scripts", "styles", "images"
 )));
 
 gulp.task("dev", gulp.series("build", gulp.parallel("browser-sync", "watch")));

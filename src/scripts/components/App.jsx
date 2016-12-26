@@ -3,6 +3,7 @@
 import React from "react"
 import ReactCSSTransitionGroup from "react-addons-css-transition-group"
 
+import Logo from "components/Logo"
 import ScoreHintContainer from "components/ScoreHintContainer"
 import Timer from "components/Timer"
 import Board from "components/board/Board"
@@ -66,6 +67,7 @@ export default class App extends React.Component {
 
     return (
       <div className="app">
+        <Logo />
         <div className="app_content">
           <ScoreHintContainer score={this.state.score} hints={this.state.hints} />
           <Timer

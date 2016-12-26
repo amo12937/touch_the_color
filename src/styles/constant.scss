@@ -34,14 +34,14 @@ $retry-height: 6vmin;
 $retry-border-radius: 3vmin;
 
 /* layout */
-$logo-width: 75vmin;
-$logo-height: 15vmin;
-$logo-padding-top-portrait: calc(50vh - 65vmin); // 50vh - 50vmin - 15vmin;
-$logo-padding-top-landscape: calc(50vh - 50vmin);
+$logo-width-portrait: 76vmin;
+$logo-height-portrait: 16vmin;
+$logo-width-landscape: 30vmin;
+$logo-height-landscape: 6vmin;
 
 $app-width: 100vmin;
 $app-height: 100vmin;
-$app-content-padding-portrait: $logo-height;
+$app-content-padding-portrait: $logo-height-portrait;
 $app-content-padding-landscape: 0;
 
 $game-over-width: 72vmin;
