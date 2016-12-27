@@ -29,12 +29,14 @@
   width: $hint-inner-size;
   height: $hint-inner-size;
   margin: ($current-hint-inner-size + $margin - $hint-inner-size) $margin $margin;
+  font-size: $font-size-small;
 
   &.hint-0 {
     width: $current-hint-inner-size;
     height: $current-hint-inner-size;
     float: left;
     margin: $margin;
+    font-size: $font-size-medium;
 
     @include hint_animation(0);
   }

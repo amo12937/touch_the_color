@@ -49,3 +49,8 @@ $game-over-height: 24vmin;
 $game-over-padding-portrait: $app-content-padding-portrait + $app-height + $margin;
 $game-over-padding-landscape: $app-content-padding-landscape + $score-hint-container-height + $timer-height + ($board-size - $game-over-height) / 2;
 
+/* font size */
+$font-size-small: 4vmin;
+$font-size-medium: 7vmin;
+$font-size-large: 12.5vmin;
+
