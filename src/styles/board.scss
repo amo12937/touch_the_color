@@ -27,21 +27,23 @@
   float: left;
   position: relative;
   margin: $margin;
-  font-size: $font-size-large;
 
   &.board_cell-3 {
     width: $board-size / 3 - $margin * 2;
     height: $board-size / 3 - $margin * 2;
+    font-size: $font-size-large / 3;
   }
 
   &.board_cell-4 {
     width: $board-size / 4 - $margin * 2;
     height: $board-size / 4 - $margin * 2;
+    font-size: $font-size-large / 4;
   }
 
   &.board_cell-5 {
     width: $board-size / 5 - $margin * 2;
     height: $board-size / 5 - $margin * 2;
+    font-size: $font-size-large / 5;
   }
 }
 
