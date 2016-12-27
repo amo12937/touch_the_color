@@ -8,6 +8,7 @@ export default class Tile {
     this.textColor = bgColor.textColor();
     this.className = klass;
     this.key = key;
+    this.hash = "" + bgColor + borderColor + text + klass;
   }
 }
 

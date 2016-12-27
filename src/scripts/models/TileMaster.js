@@ -66,7 +66,7 @@ var colors5 = [
 ];
 
 var nums = "0123456789";
-var uni = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var jap = "㌀㌁㌂㌃㌄㌅㌆㌇㌈㌉㌊㌋㌌㌍㌎㌏㌐㌑㌒㌓㌔㌕㌖㌗㌘㌙㌚㌛㌜㌝㌞㌟㌠㌡㌢㌣㌤㌥㌦㌧㌨㌩㌪㌫㌬㌭㌮㌯㌰㌱㌲㌳㌴㌵㌶㌷㌸㌹㌺㌻㌼㌽㌾㌿㍀㍁㍂㍃㍄㍅㍆㍇㍈㍉㍊㍋㍌㍍㍎㍏㍐㍑㍒㍓㍔㍕㍖㍗㍿";
 
 var f = (colors, texts, types) => Array.from(wu(colors).map((color) =>
   wu(texts).map((text) =>
@@ -79,19 +79,19 @@ var f = (colors, texts, types) => Array.from(wu(colors).map((color) =>
 
 export default {
   3: [
-    {num: 3, level: 1, score:    0, tiles: f(colors3, [""], ["square"])},
-    {num: 3, level: 2, score: 1000, tiles: f(colors3, nums, ["square"])},
-    {num: 3, level: 3, score: 5000, tiles: f(colors3, uni, ["square"])},
+    {num: 3, level: 1, score:   0, tiles: f(colors3, [""], ["square"])},
+    {num: 3, level: 2, score: 100, tiles: f(colors3, [""], ["square", "circle"])},
+    {num: 3, level: 3, score: 200, tiles: f(colors3, nums, ["square", "circle"])},
   ],
   4: [
-    {num: 4, level: 1, score:    0, tiles: f(colors4, [""], ["square", "circle"])},
-    {num: 4, level: 2, score: 1000, tiles: f(colors4, nums, ["square", "circle"])},
-    {num: 4, level: 3, score: 5000, tiles: f(colors4, uni, ["square", "circle"])},
+    {num: 4, level: 1, score:   0, tiles: f(colors4, [""], ["square", "circle"])},
+    {num: 4, level: 2, score: 100, tiles: f(colors4, nums, ["square", "circle"])},
+    {num: 4, level: 3, score: 200, tiles: f(colors4, jap, ["square", "circle"])},
   ],
   5: [
-    {num: 5, level: 1, score:    0, tiles: f(colors5, [""], ["square", "circle"])},
-    {num: 5, level: 2, score: 1000, tiles: f(colors5, nums, ["square", "circle"])},
-    {num: 5, level: 3, score: 5000, tiles: f(colors5, uni, ["square", "circle"])}
+    {num: 5, level: 1, score:   0, tiles: f(colors5, [""], ["square", "circle"])},
+    {num: 5, level: 2, score: 100, tiles: f(colors5, nums, ["square", "circle"])},
+    {num: 5, level: 3, score: 200, tiles: f(colors5, jap, ["square", "circle"])}
   ]
 };
 
