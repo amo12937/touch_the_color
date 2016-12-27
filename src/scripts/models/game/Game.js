@@ -26,7 +26,7 @@ export default class Game {
     this.currentNum = 5;
 
     var storage = new PrefixStorage(localStorage, "touch_the_color/");
-    this.score = new Score(storage);
+    this.score = new Score(this.currentNum, storage);
 
     this.states = {
       INIT: new StateInit(this),
@@ -47,7 +47,7 @@ export default class Game {
         onInit: () => {
           self.currentNum = (self.currentNum + 1) % 3 + 3;
           var num = self.currentNum;
-          self.score.reset();
+          self.score.reset(num);
           self.timer.reset();
           self.scoreTable = self._makeScoreTable();
           self._tileUpdationRule = self._makeLevel(num);

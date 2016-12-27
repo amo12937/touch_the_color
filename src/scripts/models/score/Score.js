@@ -25,22 +25,26 @@ var bestIcons = {
 };
 
 export default class Score {
-  constructor(storage) {
-    var best = 1 * storage.getItem("best");
+  constructor(num, storage) {
     this._storage = storage;
+    this._num = num;
     this.current = new ScoreValue(0, scoreIcons.table, scoreIcons.last);
-    this.best = new ScoreValue(best, bestIcons.table, bestIcons.last);
+    this.best = new ScoreValue(0, bestIcons.table, bestIcons.last);
+    this.reset(num);
   }
 
-  reset() {
+  reset(num) {
+    this._num = num;
     this.current.update(0);
+    var best = 1 * this._storage.getItem("best-" + num);
+    this.best.update(best);
   }
 
   count (n = 1) {
     this.current.update(this.current.value + n);
     if (this.best.value < this.current.value) {
       this.best.update(this.current.value);
-      this._storage.setItem("best", this.current.value);
+      this._storage.setItem("best-" + this._num, this.current.value);
     }
   }
 }
