@@ -57,7 +57,8 @@ export default class App extends React.Component {
       hints: this.game.hints(),
       tiles: this.game.tiles(),
       appeals: this.game.appeals(),
-      failed: {}
+      failed: {},
+      num: this.game.currentNum
     };
   }
 
@@ -78,8 +79,8 @@ export default class App extends React.Component {
             onTimeup={this.handleTimeup}
           />
           <Board
-            num_of_rows={3}
-            num_of_cells={3}
+            num_of_rows={this.state.num}
+            num_of_cells={this.state.num}
             tiles={this.state.tiles}
             appeals={this.state.appeals}
             failed={this.state.failed}

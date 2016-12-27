@@ -6,7 +6,7 @@ export default class Tile extends React.Component {
   render() {
     var tile = this.props.tile;
     return (
-      <div className="tile" style={{backgroundColor: tile.borderColor}}>
+      <div className={"tile " + tile.className} style={{backgroundColor: tile.borderColor}}>
         <div className="tile_content" style={{
           backgroundColor: tile.bgColor,
           color: tile.textColor

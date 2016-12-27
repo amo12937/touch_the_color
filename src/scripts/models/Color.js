@@ -25,5 +25,9 @@ export default class Color {
       ? new Color(0)
       : new Color(0xffffff);
   }
+
+  isWhite() {
+    return this._r == 0xff && this._g == 0xff && this._b == 0xff;
+  }
 }
 

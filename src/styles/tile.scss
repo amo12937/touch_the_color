@@ -1,17 +1,35 @@
+$tile-size: 100%;
+$tile-border-radius: 0.2;
+$tile-border-size: 0.1;
+
+$tile-content-size: 0.8;
+$tile-content-border-radius: ($tile-border-radius - $tile-border-size) / $tile-content-size;
+
 .tile {
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: $tile-size;
+  height: $tile-size;
 
-  border-radius: 20%;
+  &.square {
+    border-radius: $tile-border-radius * $tile-size;
+    .tile_content {
+      border-radius: $tile-content-border-radius * $tile-size;
+    }
+  }
+
+  &.circle {
+    border-radius: 0.5 * $tile-size;
+    .tile_content {
+      border-radius: 50%;
+    }
+  }
 
   .tile_content {
     /* to expand div*/
     position: absolute;
-    top: 1vmin;
-    right: 1vmin;
-    bottom: 1vmin;
-    left: 1vmin;
+    width: $tile-content-size * $tile-size;
+    height: $tile-content-size * $tile-size;
+    margin: $tile-border-size * $tile-size;
 
     /* to centerize text */
     display: flex;
@@ -20,7 +38,5 @@
 
     /* to prevent user to select the text */
     user-select: none;
-
-    border-radius: calc(20% - 0.5vmin);
   }
 }

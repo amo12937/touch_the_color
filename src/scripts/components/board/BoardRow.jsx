@@ -16,12 +16,13 @@ export default class BoardRow extends React.Component {
           appeal={this.props.appeals[cell_id] || false}
           failed={this.props.failed[cell_id] || false}
           onClick={this.props.onClick}
+          num_of_cells={this.props.num_of_cells}
         />
       );
     }
 
     return (
-      <div className="board_row">{cells}</div>
+      <div className={"board_row board_row-" + this.props.num_of_cells}>{cells}</div>
     );
   }
 }

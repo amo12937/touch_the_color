@@ -19,15 +19,15 @@ $score-hint-container-inner-height: $score-hint-container-height - 2 * $margin;
 $timer-width: 77vmin;
 $timer-height: 3vmin;
 $timer-inner-height: $timer-height - 2 * $margin;
-$timer-back-color: #cccccc;
-$timer-color1: #4f92ff;
-$timer-color2: #3bf42e;
-$timer-color3: #fde84c;
-$timer-color4: #ff5f38;
+$timer-back-color: #c8c8cb;
+$timer-color1: #0041ff;
+$timer-color2: #35a16b;
+$timer-color3: #faf500;
+$timer-color4: #ff2800;
 
-$board-cell-size: 27vmin;
+$board-size: 81vmin;
+$board-cell-size: $board-size / 5;
 $board-cell-inner-size: $board-cell-size - 2 * $margin;
-$board-size: $board-cell-size * 3;
 
 $retry-width: 72vmin;
 $retry-height: 6vmin;
@@ -52,5 +52,5 @@ $game-over-padding-landscape: $app-content-padding-landscape + $score-hint-conta
 /* font size */
 $font-size-small: 4vmin;
 $font-size-medium: 7vmin;
-$font-size-large: 12.5vmin;
+$font-size-large: 2vmin;
 

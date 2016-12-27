@@ -25,7 +25,7 @@ export default class BoardCell extends React.Component {
 
     var tile = this.props.tile;
 
-    var classes = ["board_cell"];
+    var classes = ["board_cell", "board_cell-" + this.props.num_of_cells];
     if (this.props.appeal) classes.push("board_cell_appeal");
 
     return (

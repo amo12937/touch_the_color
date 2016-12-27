@@ -9,7 +9,7 @@ import TileContainer from "models/TileContainer"
 import TileModel from "models/Tile"
 import TimerModel from "models/Timer"
 import Color from "models/Color"
-import ColorMaster from "models/ColorMaster"
+import TileMaster from "models/TileMaster"
 import Pool from "models/Pool"
 import PrefixStorage from "models/PrefixStorage"
 import wu from "wu"
@@ -23,6 +23,7 @@ import StateFinished from "models/game/states/Finished"
 export default class Game {
   constructor() {
     this.timer = new TimerModel(5000);
+    this.currentNum = 5;
 
     var storage = new PrefixStorage(localStorage, "touch_the_color/");
     this.score = new Score(storage);
@@ -44,12 +45,14 @@ export default class Game {
       ],
       callbacks: {
         onInit: () => {
+          self.currentNum = (self.currentNum + 1) % 3 + 3;
+          var num = self.currentNum;
           self.score.reset();
           self.timer.reset();
           self.scoreTable = self._makeScoreTable();
-          self._tileUpdationRule = self._makeTileUpdationRule();
-          self._hintContainer = self._makeHintContainer();
-          self._tileContainer = self._makeTileContainer(self._tileUpdationRule.shift().pool);
+          self._tileUpdationRule = self._makeLevel(num);
+          self._hintContainer = self._makeHintContainer(num);
+          self._tileContainer = self._makeTileContainer(num, self._tileUpdationRule.shift().pool);
           self.state = self.states.INIT;
         },
         onStarted: () => {
@@ -71,24 +74,23 @@ export default class Game {
     ], {score: 1});
   }
 
-  _makeTileUpdationRule() {
-    return [{
-      score: 0,
-      pool: new Pool(ColorMaster[0].map((color) => new TileModel(color)))
-    }, {
-      score: 1000,
-      pool: new Pool([].concat.apply([], ColorMaster[1].map((color) =>
-        [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => new TileModel(color, color, i))
-      )))
-    }];
+  _makeLevel(num) {
+    return TileMaster[num].map((lv) => {
+      return {
+        num: lv.num,
+        level: lv.level,
+        score: lv.score,
+        pool: new Pool(lv.tiles)
+      };
+    });
   }
 
-  _makeHintContainer() {
-    return new HintModel(9, 4, Rand.randIterator);
+  _makeHintContainer(num) {
+    return new HintModel(num * num, 4, Rand.randIterator);
   }
 
-  _makeTileContainer(pool) {
-    return new TileContainer(9, pool);
+  _makeTileContainer(num, pool) {
+    return new TileContainer(num * num, pool);
   }
 
   retry() { this.state.retry(); }
