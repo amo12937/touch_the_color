@@ -1,4 +1,5 @@
 var gulp = require("gulp");
+var argv = require("minimist")(process.argv.slice(2));
 
 var dir = (root) => {
   var self = (path) => `${root}/${path}`;
@@ -9,8 +10,10 @@ var dir = (root) => {
   return self;
 };
 
+var isUglify = !!argv.uglify;
+var destName = argv.dest || "dev";
 var src = dir("src");
-var dest = dir("dev");
+var dest = dir(destName);
 
 ((del = require("del")) =>
   gulp.task("clean", () => del([dest("*")]))
@@ -19,10 +22,15 @@ var dest = dir("dev");
 /***************************
  * README                  *
  ***************************/
-gulp.task("README", () =>
-  gulp.src(src("README.md"))
-  .pipe(gulp.dest(dest("")))
-);
+((
+  rename = require("gulp-rename")
+) => {
+  gulp.task("README", () =>
+    gulp.src(src(`README/${destName}.md`))
+    .pipe(rename("README.md"))
+    .pipe(gulp.dest(dest("")))
+  );
+})();
 
 /***************************
  * html                    *
@@ -40,10 +48,11 @@ gulp.task("html", () =>
   babelify = require("babelify"),
   browserify = require("browserify"),
   buffer = require("vinyl-buffer"),
-  source = require("vinyl-source-stream")
+  source = require("vinyl-source-stream"),
+  uglify = require("gulp-uglify")
 ) => {
-  gulp.task("scripts", () =>
-    browserify({
+  gulp.task("scripts", () => {
+    var task = browserify({
       entries: [src.scripts("index.jsx")],
       extensions: [".js", ".jsx"],
       paths: ["src/scripts/"]
@@ -52,9 +61,10 @@ gulp.task("html", () =>
     .bundle()
     .on("error", (err) => console.log("Error : " + err.message))
     .pipe(source("bundle.js"))
-    .pipe(buffer())
-    .pipe(gulp.dest(dest.scripts("")))
-  );
+    .pipe(buffer());
+    if (isUglify) task = task.pipe(uglify())
+    return task.pipe(gulp.dest(dest.scripts("")))
+  });
 })();
 
 /***************************
@@ -66,7 +76,7 @@ gulp.task("html", () =>
 ) => {
   gulp.task("styles", () =>
     gulp.src(src.styles("main.scss"))
-    .pipe(sass())
+    .pipe(sass({outputStyle: (isUglify ? "compressed" : "nested")}))
     .pipe(autoprefixer())
     .pipe(gulp.dest(dest.styles("")))
   )

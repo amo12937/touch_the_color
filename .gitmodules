@@ -1,3 +1,6 @@
 [submodule "dev"]
 	path = dev
 	url = git@github.com:amo12937/touch_the_color_dev.git
+[submodule "prod"]
+	path = prod
+	url = git@github.com:amo12937/touch_the_color_web.git
