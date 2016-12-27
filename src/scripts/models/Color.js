@@ -1,10 +1,10 @@
 "use strict";
 
 export default class Color {
-  constructor(r, g, b) {
-    this._r = r;
-    this._g = g;
-    this._b = b
+  constructor(rgb) {
+    this._r = (rgb >> 16) % 0x100;
+    this._g = (rgb >>  8) % 0x100;
+    this._b = (rgb >>  0) % 0x100;
   }
 
   toString() {
@@ -22,8 +22,8 @@ export default class Color {
 
   textColor() {
     return this.isBright()
-      ? new Color(0, 0, 0)
-      : new Color(0xff, 0xff, 0xff);
+      ? new Color(0)
+      : new Color(0xffffff);
   }
 }
 
