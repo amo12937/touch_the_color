@@ -4,7 +4,7 @@ import Color from "models/Color"
 
 var f = (r, g, b) => new Color(r * 0x10000 + g * 0x100 + b);
 
-window.foo = {
+export default {
   red:              f(255,  40,   0),
   yellow:           f(250, 245,   0),
   green:            f( 53, 161, 107),
@@ -28,6 +28,4 @@ window.foo = {
   gray:             f(127, 135, 143),
   black:            f(  0,   0,   0),
 };
-
-export default window.foo;
 

@@ -9,7 +9,6 @@ import TileContainer from "models/TileContainer"
 import TileModel from "models/Tile"
 import TimerModel from "models/Timer"
 import Color from "models/Color"
-import TileMaster from "models/TileMaster"
 import Pool from "models/Pool"
 import PrefixStorage from "models/PrefixStorage"
 import wu from "wu"
@@ -21,9 +20,8 @@ import StateStarted from "models/game/states/Started"
 import StateFinished from "models/game/states/Finished"
 
 export default class Game {
-  constructor() {
+  constructor(size, lv) {
     this.timer = new TimerModel(5000);
-    this.currentNum = 5;
 
     var storage = new PrefixStorage(localStorage, "touch_the_color/");
     this.score = new Score(this.currentNum, storage);
@@ -45,14 +43,12 @@ export default class Game {
       ],
       callbacks: {
         onInit: () => {
-          self.currentNum = (self.currentNum + 1) % 3 + 3;
-          var num = self.currentNum;
-          self.score.reset(num);
+          self.score.reset(size);
           self.timer.reset();
           self.scoreTable = self._makeScoreTable();
-          self._tileUpdationRule = self._makeLevel(num);
-          self._hintContainer = self._makeHintContainer(num);
-          self._tileContainer = self._makeTileContainer(num, self._tileUpdationRule.shift().pool);
+          self._tileUpdationRule = self._makeTileUpdationRule(lv);
+          self._hintContainer = self._makeHintContainer(size);
+          self._tileContainer = self._makeTileContainer(size, self._tileUpdationRule.shift().pool);
           self.state = self.states.INIT;
         },
         onStarted: () => {
@@ -74,14 +70,12 @@ export default class Game {
     ], {score: 1});
   }
 
-  _makeLevel(num) {
-    return TileMaster[num].map((lv) => {
+  _makeTileUpdationRule(lv) {
+    return lv.tileUpdationRule.map((rule) => {
       return {
-        num: lv.num,
-        level: lv.level,
-        score: lv.score,
-        pool: new Pool(lv.tiles)
-      };
+        score: rule.score,
+        pool: new Pool(rule.tiles)
+      }
     });
   }
 

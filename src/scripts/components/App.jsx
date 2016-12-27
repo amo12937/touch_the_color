@@ -9,12 +9,15 @@ import Timer from "components/Timer"
 import Board from "components/board/Board"
 import GameOver from "components/GameOver"
 
+import LevelMaster from "models/master/LevelMaster"
 import Game from "models/game/Game"
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.game = new Game();
+    this.size = 3;
+    var lv = LevelMaster[this.size][0];
+    this.game = new Game(this.size, lv);
 
     this.state = this.getState();
 
@@ -58,7 +61,7 @@ export default class App extends React.Component {
       tiles: this.game.tiles(),
       appeals: this.game.appeals(),
       failed: {},
-      num: this.game.currentNum
+      num: this.size
     };
   }
 
