@@ -87,7 +87,7 @@ gulp.task("html", () =>
  ***************************/
 (() => {
   gulp.task("images", () =>
-    gulp.src(src.images("**/*.svg"))
+    gulp.src(src.images("**/*"))
     .pipe(gulp.dest(dest.images("")))
   )
 })();
