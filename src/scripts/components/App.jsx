@@ -67,7 +67,7 @@ export default class App extends React.Component {
 
   render() {
     var gameOver = this.state.gameState == this.state.gameStates.FINISHED &&
-      <GameOver onClickRetry={this.handleRetry} />;
+      <GameOver onClickRetry={this.handleRetry} score={this.state.score} />;
 
     return (
       <div className="app">

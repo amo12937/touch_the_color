@@ -38,14 +38,20 @@ export default class Score {
     this.current.update(0);
     var best = 1 * this._storage.getItem("best-" + num);
     this.best.update(best);
+    this._isNewRecord = false;
   }
 
   count (n = 1) {
     this.current.update(this.current.value + n);
     if (this.best.value < this.current.value) {
+      this._isNewRecord = true;
       this.best.update(this.current.value);
       this._storage.setItem("best-" + this._num, this.current.value);
     }
+  }
+
+  isNewRecord() {
+    return this._isNewRecord;
   }
 }
 
