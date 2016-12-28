@@ -7,7 +7,7 @@ export default class Logo extends React.Component {
     return (
       <div className="logo">
         <div className="logo-inner">
-          <img className="logo-image" src="images/logo.svg" />
+          Touch The Color
         </div>
       </div>
     );

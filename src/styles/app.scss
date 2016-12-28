@@ -6,6 +6,12 @@
 .logo-inner {
   width: $logo-width-portrait;
   height: $logo-height-portrait;
+  font-size: $logo-font-size-portrait;
+  font-weight: bold;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
 
 .app_content {
@@ -22,11 +28,12 @@
   margin: 0 auto;
 }
 
-@media screen and (min-aspect-ratio: 2/3) {
+@media screen and (min-aspect-ratio: 10/13) {
   .logo-inner {
     width: $logo-width-landscape;
     height: $logo-height-landscape;
     margin-left: auto;
+    font-size: $logo-font-size-landscape;
   }
 
   .app_content {
