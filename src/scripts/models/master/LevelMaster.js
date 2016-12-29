@@ -89,7 +89,7 @@ var levels = {
     f(colors3, [""], ["square", "circle"]),
     f(colors3, nums, ["square", "circle"]),
     f(colors3, jap,  ["square", "circle"]),
-    f(colorsGray, yi,   ["square"]),
+    f(colorsGray, yi,   ["square"])
   ],
   4: [
     f(colors4, [""], ["square", "circle"]),
@@ -99,18 +99,19 @@ var levels = {
   5: [
     f(colors5, [""], ["square", "circle"]),
     f(colors5, nums, ["square", "circle"]),
-    f(colors5, jap,  ["square", "circle"])
+    f(colors5, jap,  ["square", "circle"]),
+    f(colorsGray, yi,   ["square"])
   ]
 }
 
 export default {
   3: [
     {level: 1, tileUpdationRule: [
-      {score:     0, tiles: levels[3][0]},
-      {score:  1000, tiles: levels[3][1]},
-      {score:  3000, tiles: levels[3][2]},
-      {score:  6000, tiles: levels[3][3]},
-      {score: 10000, tiles: levels[3][4]},
+      {score:    0, tiles: levels[3][0]},
+      {score:  500, tiles: levels[3][1]},
+      {score: 1500, tiles: levels[3][2]},
+      {score: 3000, tiles: levels[3][3]},
+      {score: 5000, tiles: levels[3][4]},
     ]}
   ],
   4: [
@@ -122,9 +123,9 @@ export default {
   ],
   5: [
     {level: 1, tileUpdationRule: [
-      {score:   0, tiles: levels[5][0]},
-      {score: 1000, tiles: levels[5][1]},
-      {score: 3000, tiles: levels[5][2]},
+      {score:    0, tiles: levels[5][0]},
+      {score:  500, tiles: levels[5][1]},
+      {score: 1500, tiles: levels[5][2]},
     ]}
   ]
 };

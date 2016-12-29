@@ -64,9 +64,9 @@ export default class Game {
 
   _makeScoreTable() {
     return new ScoreTable([
-      {percent: 10, score: 10},
-      {percent: 25, score:  5},
-      {percent: 50, score:  3}
+      {percent: 10, score: 24},
+      {percent: 25, score:  6},
+      {percent: 50, score:  2}
     ], {score: 1});
   }
 
