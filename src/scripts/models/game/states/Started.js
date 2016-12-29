@@ -14,7 +14,6 @@ export default class Started {
     }
 
     game.timer.add(now, -1500);
-    game.timeup(now);
     return false;
   }
 
@@ -24,6 +23,7 @@ export default class Started {
 
   timeup(now) {
     var game = this._game;
-    if (game.timer.isFinished(now)) game._fsm.timeup();
+    game.timer.timeup(now);
+    if (game.timer.is("Finished")) game._fsm.timeup();
   }
 }
