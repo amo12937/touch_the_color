@@ -5,6 +5,16 @@ $tile-border-size: 0.1;
 $tile-content-size: 0.8;
 $tile-content-border-radius: ($tile-border-radius - $tile-border-size) / $tile-content-size;
 
+@font-face {
+  font-family: "yi";
+  src: url("../fonts/NuosuSIL.ttf");
+}
+
+@font-face {
+  font-family: "cjk-compatibility";
+  src: url("../fonts/gw558365.ttf");
+}
+
 .tile {
   position: relative;
   width: $tile-size;
@@ -40,3 +50,9 @@ $tile-content-border-radius: ($tile-border-radius - $tile-border-size) / $tile-c
     user-select: none;
   }
 }
+
+.font {
+  font-family: "sans-serif", "yi", "cjk-compatibility";
+  font-weight: bold;
+}
+

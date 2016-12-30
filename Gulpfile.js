@@ -3,7 +3,7 @@ var argv = require("minimist")(process.argv.slice(2));
 
 var dir = (root) => {
   var self = (path) => `${root}/${path}`;
-  ["scripts", "styles", "images"].map((subdir) => {
+  ["scripts", "styles", "images", "fonts"].map((subdir) => {
     self[subdir] = (path) => self(`${subdir}/${path}`)
   });
 
@@ -36,7 +36,7 @@ var dest = dir(destName);
  * html                    *
  ***************************/
 gulp.task("html", () =>
-  gulp.src(src("index.html"))
+  gulp.src(src("*.html"))
   .pipe(gulp.dest(dest("")))
 );
 
@@ -93,6 +93,16 @@ gulp.task("html", () =>
 })();
 
 /***************************
+ * fonts                   *
+ ***************************/
+(() => {
+  gulp.task("fonts", () =>
+    gulp.src(src.fonts("**/*"))
+    .pipe(gulp.dest(dest.fonts("")))
+  )
+})();
+
+/***************************
  * watch                   *
  ***************************/
 ((browserSync = require("browser-sync")) => {
@@ -104,7 +114,7 @@ gulp.task("html", () =>
     gulp.watch(src("README.md"))
       .on("change", gulp.series("README"));
 
-    gulp.watch(src("index.html"))
+    gulp.watch(src("*.html"))
       .on("change", gulp.series("html", "reload"));
 
     gulp.watch([src.scripts("**/*.js"), src.scripts("**/*.jsx")])
@@ -116,7 +126,7 @@ gulp.task("html", () =>
 })();
 
 gulp.task("build", gulp.series("clean", gulp.parallel(
-  "README", "html", "scripts", "styles", "images"
+  "README", "html", "scripts", "styles", "images", "fonts"
 )));
 
 gulp.task("dev", gulp.series("build", gulp.parallel("browser-sync", "watch")));
