@@ -78,6 +78,7 @@ export default class Timer {
     this.reset = run("reset");
     this.currentState = () => fsm.current;
     this.is = (s) => fsm.is(s);
+    this.can = (e) => fsm.can(e);
   }
 }
 

@@ -21,9 +21,10 @@ export default class App extends React.Component {
 
     this.state = this.getState();
 
-    this.handleClick = this.handleClick.bind(this);
-    this.handleTimeup = this.handleTimeup.bind(this);
-    this.handleRetry = this.handleRetry.bind(this);
+    var self = this;
+    ["handleClick", "handleTimeup", "handleRetry", "handlePause", "handleResume"].forEach((key) => {
+      self[key] = self[key].bind(self);
+    });
   }
 
   handleClick(cellId) {
@@ -48,6 +49,16 @@ export default class App extends React.Component {
 
   handleRetry() {
     this.game.retry();
+    this.setState(this.getState());
+  }
+
+  handlePause() {
+    this.game.pause();
+    this.setState(this.getState());
+  }
+
+  handleResume() {
+    this.game.resume();
     this.setState(this.getState());
   }
 
@@ -80,6 +91,8 @@ export default class App extends React.Component {
             now={Date.now()}
             timer={this.state.timer}
             onTimeup={this.handleTimeup}
+            onPause={this.handlePause}
+            onResume={this.handleResume}
           />
           <Board
             num_of_rows={this.state.num}

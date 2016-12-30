@@ -23,5 +23,7 @@ export default class Init {
 
   retry() {}
   timeup() {}
+  pause() {}
+  resume() {}
 }
 

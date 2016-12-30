@@ -17,15 +17,17 @@ $score-hint-container-height: $current-hint-size;
 $score-hint-container-inner-height: $score-hint-container-height - 2 * $margin;
 
 $timer-width: 77vmin;
-$timer-height: 3vmin;
-$timer-inner-height: $timer-height - 2 * $margin;
+$timer-height: 12vmin;
+$timer-inner-height: 1vmin;
 $timer-back-color: #c8c8cb;
 $timer-color1: #0041ff;
 $timer-color2: #35a16b;
 $timer-color3: #faf500;
 $timer-color4: #ff2800;
+$pause-button-width: 8vmin;
+$pause-button-height: 8vmin;
 
-$board-size: 81vmin;
+$board-size: 72vmin;
 $board-cell-size: $board-size / 5;
 $board-cell-inner-size: $board-cell-size - 2 * $margin;
 

@@ -1,14 +1,19 @@
 .timer {
   width: $timer-width;
-  height: $timer-inner-height;
-  margin: $margin auto;
+  height: $timer-height;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
 }
 
+$timer_back-margin-left: 4vmin;
+
 .timer_back {
-  width: 100%;
-  height: 100%;
+  width: ($timer-width - $timer_back-margin-left - $pause-button-width - $margin);
+  height: $timer-inner-height;
   background-color: $timer-back-color;
   border-radius: ($timer-inner-height / 2);
+  margin-left: $timer_back-margin-left;
   overflow: hidden;
 }
 
@@ -17,13 +22,19 @@
   height: 100%;
   background-color: $timer-color4;
   border-radius: ($timer-inner-height / 2);
-}
 
-.timer_front-active {
   animation-name: animation-timer-front;
   animation-timing-function: linear;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
+}
+
+.timer_front-waiting {
+  animation-play-state: paused;
+}
+
+.timer_front-active {
+  animation-play-state: running;
 }
 
 @keyframes animation-timer-front {
@@ -55,5 +66,19 @@
   100% {
     width: 100%;
     background-color: $timer-color4;
+  }
+}
+
+.pause-button {
+  width: $pause-button-width;
+  height: $pause-button-height;
+  margin-left: $margin;
+
+  &.pause-button-pause {
+    content: url(../images/pause.svg);
+  }
+
+  &.pause-button-resume {
+    content: url(../images/resume.svg);
   }
 }

@@ -26,4 +26,12 @@ export default class Started {
     game.timer.timeup(now);
     if (game.timer.is("Finished")) game._fsm.timeup();
   }
+
+  pause(now) {
+    var game = this._game;
+    game.timer.pause(now);
+    if (game.timer.is("Finished")) game._fsm.timeup();
+    if (game.timer.is("Pausing")) game._fsm.pause();
+  }
+  resume() {}
 }

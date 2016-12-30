@@ -17,6 +17,7 @@ import StateMachine from "javascript-state-machine"
 
 import StateInit from "models/game/states/Init"
 import StateStarted from "models/game/states/Started"
+import StatePausing from "models/game/states/Pausing"
 import StateFinished from "models/game/states/Finished"
 
 export default class Game {
@@ -24,11 +25,13 @@ export default class Game {
     this.timer = new TimerModel(5000);
 
     var storage = new PrefixStorage(localStorage, "touch_the_color/");
-    this.score = new Score(this.currentNum, storage);
+    this.score = new Score(size, storage);
+    this.size = size;
 
     this.states = {
       INIT: new StateInit(this),
       STARTED: new StateStarted(this),
+      PAUSING: new StatePausing(this),
       FINISHED: new StateFinished(this)
     };
 
@@ -38,6 +41,8 @@ export default class Game {
       initial: "Init",
       events: [
         {name: "start", from: "Init", to: "Started"},
+        {name: "pause", from: "Started", to: "Pausing"},
+        {name: "resume", from: "Pausing", to: "Started"},
         {name: "timeup", from: "Started", to: "Finished"},
         {name: "retry", from: "Finished", to: "Init"}
       ],
@@ -51,9 +56,15 @@ export default class Game {
           self._tileContainer = self._makeTileContainer(size, self._tileUpdationRule.shift().pool);
           self.state = self.states.INIT;
         },
-        onStarted: () => {
+        onstart: () => {
           self.timer.start(Date.now());
+        },
+        onStarted: () => {
+          console.log("onStarted");
           self.state = self.states.STARTED;
+        },
+        onPausing: () => {
+          self.state = self.states.PAUSING;
         },
         onFinished: () => self.state = self.states.FINISHED
       }
@@ -106,8 +117,17 @@ export default class Game {
     var tiles = this.tiles();
     return this._hintContainer.hints.map((i) => tiles[i])
   }
-  tiles() { return this._tileContainer.tiles(); }
+  tiles() { return this.state.tiles ? this.state.tiles() : this._tileContainer.tiles(); }
 
   appeals() { return this.state.appeals(); }
+
+  pause() {
+    console.log("pause");
+    this.state.pause(Date.now());
+  }
+  resume() {
+    console.log("resume");
+    this.state.resume(Date.now());
+  }
 }
 
